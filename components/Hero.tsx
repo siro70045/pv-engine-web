@@ -16,6 +16,11 @@ export default function Hero() {
       {/* Gradient overlay for readability */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/40 to-black/15" />
 
+      {/* Top fade — softens transition with navbar */}
+      <div
+        className="absolute top-0 left-0 right-0 h-24 md:h-32 bg-gradient-to-b from-meridiana-cream/70 via-meridiana-cream/20 to-transparent pointer-events-none z-[5]"
+      />
+
       {/* Content layer */}
       <div className="relative z-10 container mx-auto px-6 md:px-12 h-full flex flex-col justify-center">
         <div className="max-w-2xl">
