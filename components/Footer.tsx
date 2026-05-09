@@ -1,3 +1,5 @@
+import MeridianaLogo from "@/components/MeridianaLogo";
+
 export default function Footer() {
   return (
     <footer className="bg-meridiana-black text-meridiana-cream mt-32">
@@ -5,8 +7,8 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-12 mb-16">
           {/* Logo + tagline */}
           <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-2 font-serif text-xl mb-4">
-              <span className="text-meridiana-yellow">☀</span>
+            <div className="flex items-center gap-2.5 font-serif text-xl mb-4">
+              <MeridianaLogo size={24} variant="on-dark" />
               <span className="font-semibold">Meridiana</span>
             </div>
             <p className="text-sm text-meridiana-cream/60 leading-relaxed">

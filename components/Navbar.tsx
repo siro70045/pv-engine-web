@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import MeridianaLogo from "@/components/MeridianaLogo";
 
 interface NavbarProps {
   active?: "scuole" | "casa" | "aziende" | "magazine" | "metodologia";
@@ -21,8 +22,8 @@ export default function Navbar({ active }: NavbarProps) {
     <header className="sticky top-0 z-50 bg-meridiana-cream/25 backdrop-blur-2xl backdrop-saturate-150 border-b border-meridiana-border-light/50">
       <nav className="container mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2 font-serif text-xl">
-          <span className="text-meridiana-yellow text-2xl leading-none">☀</span>
+        <a href="/" className="flex items-center gap-2.5 font-serif text-xl">
+          <MeridianaLogo size={28} />
           <span className="text-meridiana-black font-semibold">Meridiana</span>
         </a>
 
