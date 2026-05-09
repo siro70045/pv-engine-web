@@ -1,54 +1,57 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+interface NavbarProps {
+  active?: "scuole" | "casa" | "aziende" | "magazine" | "metodologia";
+}
+
+export default function Navbar({ active }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const navItems = [
+    { label: "Scuole", href: "/scuole", id: "scuole" },
+    { label: "Casa", href: "/casa", id: "casa" },
+    { label: "Aziende", href: "/aziende", id: "aziende" },
+    { label: "Magazine", href: "/magazine", id: "magazine" },
+    { label: "Metodologia", href: "/metodologia", id: "metodologia" },
+  ] as const;
 
   return (
-    <header
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-meridiana-cream/80 backdrop-blur-xl backdrop-saturate-150 border-b border-meridiana-border-light"
-          : "bg-transparent"
-      }`}
-    >
+    <header className="sticky top-0 z-50 bg-meridiana-cream/70 backdrop-blur-xl backdrop-saturate-150 border-b border-meridiana-border-light">
       <nav className="container mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <a href="/" className="flex items-center gap-2 font-serif text-xl">
-          <span className="text-meridiana-yellow">☀</span>
+          <span className="text-meridiana-yellow text-2xl leading-none">☀</span>
           <span className="text-meridiana-black font-semibold">Meridiana</span>
         </a>
 
         {/* Desktop nav */}
         <ul className="hidden md:flex items-center gap-8 text-sm">
-          {["Scuole", "Casa", "Aziende", "Magazine", "Metodologia"].map((item) => (
-            <li key={item}>
+          {navItems.map((item) => (
+            <li key={item.id}>
               <a
-                href={`/${item.toLowerCase()}`}
-                className="text-meridiana-text-secondary hover:text-meridiana-black transition-colors"
+                href={item.href}
+                className={`transition-colors pb-1 ${
+                  active === item.id
+                    ? "text-meridiana-black border-b-2 border-meridiana-yellow"
+                    : "text-meridiana-text-secondary hover:text-meridiana-black"
+                }`}
               >
-                {item}
+                {item.label}
               </a>
             </li>
           ))}
         </ul>
 
-        {/* Right side: lang + CTA */}
-        <div className="hidden md:flex items-center gap-4">
+        {/* Right: lang + CTA */}
+        <div className="hidden md:flex items-center gap-5">
           <span className="text-xs text-meridiana-text-tertiary tracking-wider">
-            IT · <span className="opacity-50">EN</span>
+            <span className="text-meridiana-text-secondary">IT</span> · <span className="opacity-50">EN</span>
           </span>
           <a
             href="/simulatore"
-            className="bg-meridiana-yellow hover:bg-meridiana-yellow-hover text-meridiana-black font-semibold text-sm px-4 py-2 rounded-full transition-colors"
+            className="bg-meridiana-yellow hover:bg-meridiana-yellow-hover text-meridiana-black font-semibold text-sm px-5 py-2 rounded-full transition-colors"
           >
             Avvia simulatore →
           </a>
@@ -70,14 +73,14 @@ export default function Navbar() {
       {mobileOpen && (
         <div className="md:hidden fixed inset-0 top-16 bg-meridiana-cream backdrop-blur-xl z-40">
           <ul className="flex flex-col gap-6 p-8 text-2xl font-serif">
-            {["Scuole", "Casa", "Aziende", "Magazine", "Metodologia"].map((item) => (
-              <li key={item}>
+            {navItems.map((item) => (
+              <li key={item.id}>
                 <a
-                  href={`/${item.toLowerCase()}`}
+                  href={item.href}
                   className="text-meridiana-black"
                   onClick={() => setMobileOpen(false)}
                 >
-                  {item}
+                  {item.label}
                 </a>
               </li>
             ))}
