@@ -23,7 +23,7 @@ export default function Hero() {
 
       {/* Bottom fade — softens transition into IntroSection */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-16 md:h-20 bg-gradient-to-t from-meridiana-cream/80 to-transparent pointer-events-none z-[5]"
+        className="absolute bottom-0 left-0 right-0 h-12 md:h-16 bg-gradient-to-t from-meridiana-cream via-meridiana-cream/30 to-transparent pointer-events-none z-[5]"
       />
 
       {/* Content layer */}
