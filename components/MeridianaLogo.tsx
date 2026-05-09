@@ -22,45 +22,48 @@ export default function MeridianaLogo({
       className={className}
       aria-label="Logo Meridiana"
     >
-      {/* Half-sun OUTLINE — arc only, base is drawn separately */}
+      {/* Half-sun OUTLINE — semicircle moved down (center y=25 instead of 23) */}
       <path
-        d="M 4 23 A 12 12 0 0 1 28 23"
+        d="M 5 25 A 11 11 0 0 1 27 25"
         fill="none"
         stroke={sunColor}
         strokeWidth="2.5"
         strokeLinecap="round"
       />
 
-      {/* Horizon — wider base line extending beyond the semicircle */}
+      {/* Horizon — wider base line */}
       <line
         x1="1"
-        y1="23"
+        y1="25"
         x2="31"
-        y2="23"
+        y2="25"
         stroke={sunColor}
         strokeWidth="2.5"
         strokeLinecap="round"
       />
 
-      {/* 5 sun rays */}
-      <line x1="16" y1="8" x2="16" y2="3"
+      {/* 5 sun rays — repositioned for new sun center */}
+      {/* Center vertical */}
+      <line x1="16" y1="11" x2="16" y2="5"
         stroke={sunColor} strokeWidth="2.5" strokeLinecap="round" />
-      <line x1="11" y1="10" x2="9" y2="6"
+      {/* ±36° from vertical */}
+      <line x1="10.5" y1="13" x2="8.5" y2="8"
         stroke={sunColor} strokeWidth="2.5" strokeLinecap="round" />
-      <line x1="21" y1="10" x2="23" y2="6"
+      <line x1="21.5" y1="13" x2="23.5" y2="8"
         stroke={sunColor} strokeWidth="2.5" strokeLinecap="round" />
-      <line x1="8" y1="14" x2="5" y2="12"
+      {/* ±72° from vertical */}
+      <line x1="7" y1="17" x2="3.5" y2="15"
         stroke={sunColor} strokeWidth="2.5" strokeLinecap="round" />
-      <line x1="24" y1="14" x2="27" y2="12"
+      <line x1="25" y1="17" x2="28.5" y2="15"
         stroke={sunColor} strokeWidth="2.5" strokeLinecap="round" />
 
-      {/* Gnomon */}
+      {/* Gnomon — chunkier yellow pin sitting ON the horizon */}
       <rect
-        x="14.5"
-        y="14"
-        width="3"
-        height="8"
-        rx="1.5"
+        x="14"
+        y="15"
+        width="4"
+        height="10"
+        rx="2"
         fill={gnomonColor}
       />
     </svg>
