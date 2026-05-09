@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative w-full h-[85vh] min-h-[600px] md:h-[700px] overflow-hidden">
+    <section className="relative w-full h-[85vh] min-h-[720px] md:h-[780px] overflow-hidden">
       {/* Background image */}
       <Image
         src="/hero-borgo.jpg"
@@ -84,7 +84,7 @@ export default function Hero() {
       </div>
 
       {/* Glass banner 3 — Produzione mensile (con curva SVG) */}
-      <div className="hidden md:block absolute bottom-12 left-1/2 -translate-x-1/2 w-80 bg-meridiana-black/85 backdrop-blur-xl backdrop-saturate-150 border border-white/10 rounded-2xl p-6 z-10">
+      <div className="hidden md:block absolute bottom-12 right-12 w-80 bg-meridiana-black/85 backdrop-blur-xl backdrop-saturate-150 border border-white/10 rounded-2xl p-6 z-10">
         <p className="text-meridiana-yellow text-[10px] font-semibold tracking-[0.2em] uppercase mb-3">
           Produzione mensile
         </p>
