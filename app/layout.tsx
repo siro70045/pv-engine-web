@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Meridiana — fotovoltaico verificabile",
@@ -15,7 +17,9 @@ export default function RootLayout({
   return (
     <html lang="it" className="h-full antialiased">
       <body className="min-h-full bg-meridiana-cream text-meridiana-black">
-        {children}
+        <Navbar />
+        <main className="min-h-screen">{children}</main>
+        <Footer />
       </body>
     </html>
   );
