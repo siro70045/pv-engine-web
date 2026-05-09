@@ -18,7 +18,7 @@ export default function Hero() {
 
       {/* Top fade — softens transition with navbar */}
       <div
-        className="absolute top-0 left-0 right-0 h-24 md:h-32 bg-gradient-to-b from-meridiana-cream/70 via-meridiana-cream/20 to-transparent pointer-events-none z-[5]"
+        className="absolute top-0 left-0 right-0 h-4 md:h-6 bg-gradient-to-b from-meridiana-cream/70 via-meridiana-cream/20 to-transparent pointer-events-none z-[5]"
       />
 
       {/* Bottom fade — softens transition into IntroSection */}
