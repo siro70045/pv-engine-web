@@ -94,7 +94,7 @@ export default function Hero() {
           />
         </svg>
         <p className="text-meridiana-cream text-2xl font-semibold font-sans">
-          520.000 <span className="text-base font-normal text-meridiana-cream/60">kWh totali</span>
+          120.000 <span className="text-base font-normal text-meridiana-cream/60">kWh totali</span>
         </p>
       </div>
 
