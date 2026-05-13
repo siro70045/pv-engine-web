@@ -122,13 +122,13 @@ export default function Hero() {
         {/* Line 1: Scuola → edificio scuola (banner left-bottom → building below-left) */}
         <line
           x1="360" y1="140"
-          x2="480" y2="360"
+          x2="550" y2="340"
           stroke="#E8B547"
           strokeWidth="1.2"
           strokeLinecap="round"
           opacity="0.4"
         />
-        <circle cx="480" cy="360" r="3" fill="#E8B547" opacity="0.7" />
+        <circle cx="550" cy="340" r="3" fill="#E8B547" opacity="0.7" />
 
         {/* Line 2: Casa → cluster case (banner left → houses below-left) */}
         <line
