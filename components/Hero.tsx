@@ -112,6 +112,47 @@ export default function Hero() {
           520.000 <span className="text-base font-normal text-meridiana-cream/60">kWh totali</span>
         </p>
       </div>
+
+      {/* Connection lines: banners → buildings */}
+      <svg
+        className="hidden md:block absolute inset-0 w-full h-full pointer-events-none z-[8]"
+      >
+        {/* Line 1: Banner Scuola → edificio scuola */}
+        <line
+          x1="72%" y1="15%"
+          x2="60%" y2="30%"
+          stroke="#E8B547"
+          strokeWidth="1.5"
+          strokeDasharray="5 5"
+          strokeLinecap="round"
+          opacity="0.55"
+        />
+        <circle cx="60%" cy="30%" r="4" fill="#E8B547" opacity="0.85" />
+
+        {/* Line 2: Banner Casa → cluster case */}
+        <line
+          x1="75%" y1="50%"
+          x2="58%" y2="62%"
+          stroke="#E8B547"
+          strokeWidth="1.5"
+          strokeDasharray="5 5"
+          strokeLinecap="round"
+          opacity="0.55"
+        />
+        <circle cx="58%" cy="62%" r="4" fill="#E8B547" opacity="0.85" />
+
+        {/* Line 3: Banner Produzione → edificio centro/sinistra */}
+        <line
+          x1="65%" y1="85%"
+          x2="35%" y2="75%"
+          stroke="#E8B547"
+          strokeWidth="1.5"
+          strokeDasharray="5 5"
+          strokeLinecap="round"
+          opacity="0.55"
+        />
+        <circle cx="35%" cy="75%" r="4" fill="#E8B547" opacity="0.85" />
+      </svg>
     </section>
   );
 }
