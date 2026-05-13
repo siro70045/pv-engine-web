@@ -39,30 +39,15 @@ export default function Hero() {
             Misura <em className="italic font-normal">il sole</em> che si posa sul tuo edificio.
           </h1>
 
-          {/* Subtitle */}
-          <p className="text-meridiana-cream/85 text-base md:text-lg leading-relaxed mb-10 max-w-xl">
-            Meridiana calcola se il fotovoltaico ha senso per la tua casa, la tua scuola o la tua azienda. Numeri reali, dati certificati, risposta onesta — anche quando è no.
-          </p>
-
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
-            <a
-              href="/simulatore"
-              className="inline-flex items-center bg-meridiana-yellow hover:bg-meridiana-yellow-hover text-meridiana-black font-semibold text-base px-7 py-4 rounded-full transition-colors"
-            >
-              Avvia il simulatore →
-            </a>
+          {/* Subtitle + inline "Scopri come funziona" */}
+          <p className="text-meridiana-cream/85 text-base md:text-lg leading-relaxed max-w-xl">
+            Meridiana calcola se il fotovoltaico ha senso per la tua casa, la tua scuola o la tua azienda. Numeri reali, dati certificati, risposta onesta — anche quando è no.{" "}
             <a
               href="#come-funziona"
-              className="text-meridiana-cream/90 hover:text-meridiana-cream text-base underline underline-offset-4 decoration-meridiana-cream/30 hover:decoration-meridiana-cream"
+              className="text-meridiana-cream hover:text-meridiana-yellow underline underline-offset-4 decoration-meridiana-cream/40 hover:decoration-meridiana-yellow transition-colors whitespace-nowrap"
             >
               Scopri come funziona ↓
             </a>
-          </div>
-
-          {/* Disclaimer line */}
-          <p className="text-meridiana-cream/60 text-sm">
-            Gratuito · Nessuna registrazione · Risultato in 5 minuti
           </p>
         </div>
       </div>
