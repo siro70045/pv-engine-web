@@ -115,43 +115,42 @@ export default function Hero() {
 
       {/* Connection lines: banners → buildings */}
       <svg
-        className="hidden md:block absolute inset-0 w-full h-full pointer-events-none z-[8]"
+        className="hidden md:block absolute right-0 top-0 h-full w-[700px] pointer-events-none z-[8]"
+        viewBox="0 0 700 1000"
+        preserveAspectRatio="none"
       >
-        {/* Line 1: Banner Scuola → edificio scuola */}
+        {/* Line 1: Scuola → edificio scuola (top-right banner → building below-left) */}
         <line
-          x1="72%" y1="15%"
-          x2="60%" y2="30%"
+          x1="40" y1="180"
+          x2="180" y2="320"
           stroke="#E8B547"
-          strokeWidth="1.5"
-          strokeDasharray="5 5"
+          strokeWidth="1.2"
           strokeLinecap="round"
-          opacity="0.55"
+          opacity="0.4"
         />
-        <circle cx="60%" cy="30%" r="4" fill="#E8B547" opacity="0.85" />
+        <circle cx="180" cy="320" r="3" fill="#E8B547" opacity="0.7" />
 
-        {/* Line 2: Banner Casa → cluster case */}
+        {/* Line 2: Casa → cluster case (middle-right banner → houses below-left) */}
         <line
-          x1="75%" y1="50%"
-          x2="58%" y2="62%"
+          x1="30" y1="550"
+          x2="140" y2="680"
           stroke="#E8B547"
-          strokeWidth="1.5"
-          strokeDasharray="5 5"
+          strokeWidth="1.2"
           strokeLinecap="round"
-          opacity="0.55"
+          opacity="0.4"
         />
-        <circle cx="58%" cy="62%" r="4" fill="#E8B547" opacity="0.85" />
+        <circle cx="140" cy="680" r="3" fill="#E8B547" opacity="0.7" />
 
-        {/* Line 3: Banner Produzione → edificio centro/sinistra */}
+        {/* Line 3: Produzione → edificio basso-sinistra (bottom-right banner → building far-left) */}
         <line
-          x1="65%" y1="85%"
-          x2="35%" y2="75%"
+          x1="40" y1="880"
+          x2="380" y2="820"
           stroke="#E8B547"
-          strokeWidth="1.5"
-          strokeDasharray="5 5"
+          strokeWidth="1.2"
           strokeLinecap="round"
-          opacity="0.55"
+          opacity="0.4"
         />
-        <circle cx="35%" cy="75%" r="4" fill="#E8B547" opacity="0.85" />
+        <circle cx="380" cy="820" r="3" fill="#E8B547" opacity="0.7" />
       </svg>
     </section>
   );
