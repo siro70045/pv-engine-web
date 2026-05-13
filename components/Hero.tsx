@@ -119,38 +119,38 @@ export default function Hero() {
         viewBox="0 0 700 1000"
         preserveAspectRatio="none"
       >
-        {/* Line 1: Scuola → edificio scuola (top-right banner → building below-left) */}
+        {/* Line 1: Scuola → edificio scuola (banner left-bottom → building below-left) */}
         <line
-          x1="40" y1="180"
-          x2="180" y2="320"
+          x1="360" y1="140"
+          x2="480" y2="360"
           stroke="#E8B547"
           strokeWidth="1.2"
           strokeLinecap="round"
           opacity="0.4"
         />
-        <circle cx="180" cy="320" r="3" fill="#E8B547" opacity="0.7" />
+        <circle cx="480" cy="360" r="3" fill="#E8B547" opacity="0.7" />
 
-        {/* Line 2: Casa → cluster case (middle-right banner → houses below-left) */}
+        {/* Line 2: Casa → cluster case (banner left → houses below-left) */}
         <line
-          x1="30" y1="550"
-          x2="140" y2="680"
+          x1="390" y1="520"
+          x2="460" y2="680"
           stroke="#E8B547"
           strokeWidth="1.2"
           strokeLinecap="round"
           opacity="0.4"
         />
-        <circle cx="140" cy="680" r="3" fill="#E8B547" opacity="0.7" />
+        <circle cx="460" cy="680" r="3" fill="#E8B547" opacity="0.7" />
 
-        {/* Line 3: Produzione → edificio basso-sinistra (bottom-right banner → building far-left) */}
+        {/* Line 3: Produzione → edificio basso-sinistra */}
         <line
-          x1="40" y1="880"
-          x2="380" y2="820"
+          x1="325" y1="870"
+          x2="100" y2="820"
           stroke="#E8B547"
           strokeWidth="1.2"
           strokeLinecap="round"
           opacity="0.4"
         />
-        <circle cx="380" cy="820" r="3" fill="#E8B547" opacity="0.7" />
+        <circle cx="100" cy="820" r="3" fill="#E8B547" opacity="0.7" />
       </svg>
     </section>
   );
