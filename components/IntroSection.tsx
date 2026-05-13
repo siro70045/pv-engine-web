@@ -14,7 +14,7 @@ export default function IntroSection() {
 
         {/* Body */}
         <p className="text-base md:text-lg text-meridiana-text-secondary leading-relaxed max-w-2xl mx-auto">
-          Meridiana usa dati climatici certificati, modelli fisici precisi e una conoscenza profonda degli incentivi italiani per dirti — con numeri veri e chiari — se l&apos;investimento ha senso per te.
+          Meridiana usa dati climatici certificati, modelli fisici precisi e una conoscenza profonda degli incentivi italiani per dirti — con numeri veri e chiari — se l&apos;investimento ha senso per te. Offre report di analisi, non installazioni.
         </p>
       </div>
     </section>
