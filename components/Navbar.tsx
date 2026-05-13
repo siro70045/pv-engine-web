@@ -33,10 +33,10 @@ export default function Navbar({ active }: NavbarProps) {
             <li key={item.id}>
               <a
                 href={item.href}
-                className={`transition-colors pb-1 ${
+                className={`inline-block transition-all duration-200 ease-out pb-1 hover:scale-[1.08] hover:text-meridiana-yellow ${
                   active === item.id
                     ? "text-meridiana-black border-b-2 border-meridiana-yellow"
-                    : "text-meridiana-text-secondary hover:text-meridiana-black"
+                    : "text-meridiana-text-secondary"
                 }`}
               >
                 {item.label}
