@@ -53,7 +53,7 @@ export default function Hero() {
       </div>
 
       {/* Glass banner 1 — Scuola */}
-      <div className="hidden md:block absolute top-12 right-12 w-72 bg-meridiana-black/85 backdrop-blur-xl backdrop-saturate-150 border border-white/10 rounded-2xl p-6 z-10">
+      <div className="hidden md:block absolute top-12 right-12 w-72 group cursor-default bg-meridiana-black/85 backdrop-blur-xl backdrop-saturate-150 border border-white/10 rounded-2xl p-6 z-10 transition-all duration-300 ease-out hover:bg-meridiana-black/75 hover:backdrop-blur-2xl hover:backdrop-saturate-200 hover:border-white/20 hover:scale-[1.04] origin-right hover:shadow-2xl hover:shadow-black/40">
         <p className="text-meridiana-yellow text-[10px] font-semibold tracking-[0.2em] uppercase mb-2">
           Scuola · 3.000 m²
         </p>
@@ -66,7 +66,7 @@ export default function Hero() {
       </div>
 
       {/* Glass banner 2 — Casa */}
-      <div className="hidden lg:block absolute top-1/2 right-12 -translate-y-1/2 w-64 bg-meridiana-black/85 backdrop-blur-xl backdrop-saturate-150 border border-white/10 rounded-2xl p-6 z-10">
+      <div className="hidden lg:block absolute top-1/2 right-12 -translate-y-1/2 w-64 group cursor-default bg-meridiana-black/85 backdrop-blur-xl backdrop-saturate-150 border border-white/10 rounded-2xl p-6 z-10 transition-all duration-300 ease-out hover:bg-meridiana-black/75 hover:backdrop-blur-2xl hover:backdrop-saturate-200 hover:border-white/20 hover:scale-[1.04] origin-right hover:shadow-2xl hover:shadow-black/40">
         <p className="text-meridiana-yellow text-[10px] font-semibold tracking-[0.2em] uppercase mb-2">
           Casa · 180 m²
         </p>
@@ -79,7 +79,7 @@ export default function Hero() {
       </div>
 
       {/* Glass banner 3 — Produzione mensile (con curva SVG) */}
-      <div className="hidden md:block absolute bottom-12 right-12 w-80 bg-meridiana-black/85 backdrop-blur-xl backdrop-saturate-150 border border-white/10 rounded-2xl p-6 z-10">
+      <div className="hidden md:block absolute bottom-12 right-12 w-80 group cursor-default bg-meridiana-black/85 backdrop-blur-xl backdrop-saturate-150 border border-white/10 rounded-2xl p-6 z-10 transition-all duration-300 ease-out hover:bg-meridiana-black/75 hover:backdrop-blur-2xl hover:backdrop-saturate-200 hover:border-white/20 hover:scale-[1.04] origin-right hover:shadow-2xl hover:shadow-black/40">
         <p className="text-meridiana-yellow text-[10px] font-semibold tracking-[0.2em] uppercase mb-3">
           Produzione mensile
         </p>
