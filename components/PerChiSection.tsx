@@ -1,7 +1,6 @@
 import PerChiCard from "@/components/PerChiCard";
 
 interface PerChiVoce {
-  numero: "1" | "2" | "3";
   stato: string;
   statoTipo: "attivo" | "arrivo";
   titolo: string;
@@ -14,7 +13,6 @@ interface PerChiVoce {
 
 const voci: PerChiVoce[] = [
   {
-    numero: "1",
     stato: "IN ARRIVO – Inverno 2026",
     statoTipo: "arrivo",
     titolo: "Vale la pena installare i pannelli sulla tua casa?",
@@ -26,7 +24,6 @@ const voci: PerChiVoce[] = [
     orientamento: "illo-left",
   },
   {
-    numero: "2",
     stato: "Già attivo.",
     statoTipo: "attivo",
     titolo: "Non è solo energia per le scuole.",
@@ -38,7 +35,6 @@ const voci: PerChiVoce[] = [
     orientamento: "illo-right",
   },
   {
-    numero: "3",
     stato: "IN ARRIVO – Primavera 2027",
     statoTipo: "arrivo",
     titolo: "Capannoni, uffici, attività commerciali.",
@@ -54,22 +50,26 @@ const voci: PerChiVoce[] = [
 
 export default function PerChiSection() {
   return (
-    <section className="bg-meridiana-cream py-20 lg:py-32 px-6">
+    <section className="bg-meridiana-cream pt-12 lg:pt-16 pb-20 lg:pb-32 px-6">
       <div className="max-w-5xl mx-auto">
-        {/* Section header */}
-        <div className="text-center mb-8 lg:mb-16">
-          <p className="text-meridiana-yellow font-bold text-base mb-2">
-            Magari fa al caso tuo.
+        {/* Section header — deliberately tight pt above + small
+            section padding-top so the eyebrow reads as a
+            continuation of IntroSection, then a generous mb
+            below to detach the header from the Casa/Scuole/Aziende
+            blocks ("narration continues → pause → enumeration"). */}
+        <div className="text-center mb-24 lg:mb-32">
+          <p className="text-meridiana-yellow text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-2">
+            Magari fa al caso tuo
           </p>
           <p className="text-meridiana-text-secondary text-lg">
-            Case / Scuole / Aziende
+            Per case, scuole, aziende.
           </p>
         </div>
 
         {/* Editorial zig-zag blocks */}
         <div className="divide-y divide-meridiana-border-light">
           {voci.map((voce) => (
-            <PerChiCard key={voce.numero} {...voce} />
+            <PerChiCard key={voce.href} {...voce} />
           ))}
         </div>
       </div>

@@ -1,0 +1,42 @@
+/* Light scroll parallax for the isometric illustrations in
+   the "Per chi è" section.
+
+   Isolated + trivially removable: to fully revert, delete this
+   file, its import in PerChiCard.tsx, and the wrapping
+   <div className={styles.parallax}> element. Nothing else
+   depends on it.
+
+   Technique: native CSS scroll-driven animations — no JS
+   runtime, no dependency. The illustration translates slower
+   than the natural scroll, giving subtle depth (not an
+   "Apple iPad" sweep, just foreground/background separation).
+
+   Graceful fallback: the animation is applied ONLY inside
+   @supports (animation-timeline: view()). Browsers without
+   scroll-driven animations (e.g. Safari ≤ 18 as of early 2026)
+   simply ignore the block and the illustration stays in its
+   natural static position — no broken permanent offset.
+
+   Gated by media queries (inside @supports) so the effect is
+   active only on lg+ (≥1024px) and when the user has not
+   requested reduced motion. */
+
+@supports (animation-timeline: view()) {
+  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+    .parallax {
+      animation: perChiParallax linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+      will-change: transform;
+    }
+  }
+}
+
+@keyframes perChiParallax {
+  from {
+    transform: translateY(-40px);
+  }
+  to {
+    transform: translateY(40px);
+  }
+}

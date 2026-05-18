@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import styles from "./PerChiCard.module.css";
 
 interface PerChiCardProps {
-  numero: "1" | "2" | "3";
   stato: string;
   statoTipo: "attivo" | "arrivo";
   titolo: string;
@@ -14,7 +14,6 @@ interface PerChiCardProps {
 }
 
 export default function PerChiCard({
-  numero,
   stato,
   statoTipo,
   titolo,
@@ -35,27 +34,28 @@ export default function PerChiCard({
             illoLeft ? "lg:order-1" : "lg:order-2"
           }`}
         >
-          {/* Decorative serif numeral, watermark behind the illustration */}
-          <span
-            aria-hidden="true"
-            className={`pointer-events-none select-none absolute top-1/2 -translate-y-1/2 z-0 font-serif leading-none text-meridiana-yellow opacity-15 transition-opacity duration-500 ease-out group-hover:opacity-25 text-[9rem] sm:text-[11rem] lg:text-[14rem] ${
-              illoLeft
-                ? "left-0 -translate-x-2 lg:-translate-x-8"
-                : "right-0 translate-x-2 lg:translate-x-8"
-            }`}
-          >
-            {numero}
-          </span>
+          {/* Illustration — transparent PNG, never cropped (object-contain).
+              On hover it lifts off the cream: scale + saturation + a soft,
+              silhouette-following drop-shadow (filter, not box-shadow, so it
+              respects the PNG alpha). drop-shadow is applied via the Tailwind
+              utility so it composes with saturate in the same filter chain.
 
-          {/* Illustration — transparent PNG, never cropped (object-contain) */}
-          <div className="relative z-10 aspect-[1382/752]">
-            <Image
-              src={imageSrc}
-              alt={imageAlt}
-              fill
-              sizes="(min-width: 1024px) 45vw, 90vw"
-              className="object-contain transition-all duration-700 ease-out group-hover:scale-[1.04] group-hover:saturate-[1.15]"
-            />
+              The light scroll parallax (translateY) lives on the OUTER
+              styles.parallax wrapper, deliberately a different element from
+              the <Image> that carries the hover transforms — so the browser
+              never composes the scroll translate and the hover scale on the
+              same node. See PerChiCard.module.css for the technique and the
+              graceful fallback. */}
+          <div className={styles.parallax}>
+            <div className="relative z-10 aspect-[1382/752]">
+              <Image
+                src={imageSrc}
+                alt={imageAlt}
+                fill
+                sizes="(min-width: 1024px) 45vw, 90vw"
+                className="object-contain transition-all duration-700 ease-out group-hover:scale-[1.07] group-hover:saturate-[1.25] group-hover:drop-shadow-[0_28px_42px_rgba(0,0,0,0.22)]"
+              />
+            </div>
           </div>
         </div>
 
