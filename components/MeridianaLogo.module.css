@@ -1,0 +1,80 @@
+/* Navbar brand hover micro-interaction for the Meridiana logo.
+
+   On hover of the brand wrapper (.logoGroup, applied to the
+   <Link href="/"> in Navbar.tsx) the 5 sun rays of the gnomon
+   sway gently — the logo "breathes" toward the sky. The rest of
+   the mark (semicircle, horizon, yellow gnomon) never moves.
+
+   Pivot: all rays rotate around the SHARED logo center
+   (viewBox point 16,25 — semicircle center / gnomon base on the
+   horizon), NOT around each ray's own box. transform-box:
+   view-box makes transform-origin resolve in the SVG viewBox
+   coordinate system. This makes the rays sway together like a
+   coherent fan instead of vibrating individually.
+
+   Organic, non-mechanical feel: each ray has a staggered
+   animation-delay (0→400ms) and a position-dependent amplitude
+   (center subtlest, outer rays widest), all same direction so
+   the fan sways as one.
+
+   Static when not hovered (no continuous animation). The
+   transition on .ray softens the snap-back when the pointer
+   leaves mid-cycle ("si ferma gradualmente").
+
+   No JS, no dependency, plain time-based @keyframes triggered by
+   :hover — universally supported (no scroll-driven timeline, so
+   no @supports gate needed here). Honors prefers-reduced-motion:
+   the scale (a static Tailwind hover state on the wrapper) stays;
+   only the ray motion is removed. */
+
+.ray {
+  transform-box: view-box;
+  transform-origin: 16px 25px;
+  transition: transform 0.4s ease-out;
+}
+
+.logoGroup:hover .ray {
+  animation: rayOscillate 1.8s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes rayOscillate {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(var(--ray-rot, 3deg));
+  }
+}
+
+/* Ray order in MeridianaLogo.tsx: r1 center vertical,
+   r2 median-left, r3 median-right, r4 outer-left, r5 outer-right.
+   Same rotation direction (sway together); amplitude grows
+   outward; delays staggered for an organic breeze shimmer. */
+.r1 {
+  --ray-rot: 3deg;
+  animation-delay: 0ms;
+}
+.r2 {
+  --ray-rot: 5deg;
+  animation-delay: 100ms;
+}
+.r3 {
+  --ray-rot: 5deg;
+  animation-delay: 200ms;
+}
+.r4 {
+  --ray-rot: 7deg;
+  animation-delay: 300ms;
+}
+.r5 {
+  --ray-rot: 7deg;
+  animation-delay: 400ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logoGroup:hover .ray {
+    animation: none;
+  }
+}

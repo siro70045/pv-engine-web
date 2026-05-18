@@ -1,7 +1,13 @@
+import styles from "./IntroSection.module.css";
+
 export default function IntroSection() {
   return (
     <section className="bg-meridiana-cream py-24 md:py-32 px-6">
-      <div className="max-w-3xl mx-auto text-center">
+      {/* Very light continuous scroll parallax on the whole text
+          block (eyebrow + title + body move together). translateY
+          only — does not affect the max-w / mx-auto centering or
+          layout flow. See IntroSection.module.css. */}
+      <div className={`max-w-3xl mx-auto text-center ${styles.parallaxText}`}>
         {/* Eyebrow */}
         <p className="text-meridiana-yellow text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-8">
           Cosa fa Meridiana

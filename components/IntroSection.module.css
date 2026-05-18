@@ -1,0 +1,45 @@
+/* Very light scroll parallax for the IntroSection text block
+   ("Cosa fa Meridiana"). Eyebrow + title + body move together
+   as one cohesive group — the class is applied to their single
+   wrapper, not to each element.
+
+   Same technique as PerChiCard.module.css (native CSS
+   scroll-driven animations, no JS runtime, no dependency) for
+   stack coherence. This is a continuous scroll parallax, NOT an
+   entrance/fade-in — there is intentionally no opacity change.
+
+   Range is deliberately small (±20px, ~40px total) so it stays
+   subtle and does not disturb reading — half the PerChiCard
+   illustration range (±40px).
+
+   Isolated + trivially removable: to revert, delete this file,
+   its import in IntroSection.tsx, and the styles.parallaxText
+   token from the wrapper className. Nothing else depends on it.
+
+   Graceful fallback: applied ONLY inside
+   @supports (animation-timeline: view()). Browsers without
+   scroll-driven animations (e.g. Safari ≤ 18 as of early 2026)
+   ignore the block and the text stays in its natural static
+   position — no broken permanent offset. Gated (inside
+   @supports) to lg+ (≥1024px) and to users who have not
+   requested reduced motion. */
+
+@supports (animation-timeline: view()) {
+  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+    .parallaxText {
+      animation: introTextParallax linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+      will-change: transform;
+    }
+  }
+}
+
+@keyframes introTextParallax {
+  from {
+    transform: translateY(-20px);
+  }
+  to {
+    transform: translateY(20px);
+  }
+}

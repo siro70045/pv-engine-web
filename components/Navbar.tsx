@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import MeridianaLogo from "@/components/MeridianaLogo";
+import logoStyles from "@/components/MeridianaLogo.module.css";
 
 interface NavbarProps {
   active?: "scuole" | "casa" | "aziende" | "magazine" | "metodologia";
@@ -21,11 +23,17 @@ export default function Navbar({ active }: NavbarProps) {
   return (
     <header className="sticky top-0 z-50 bg-meridiana-cream/25 backdrop-blur-2xl backdrop-saturate-150 border-b border-meridiana-border-light/50">
       <nav className="container mx-auto px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <a href="/" className="flex items-center gap-2.5 font-serif text-xl">
+        {/* Logo + wordmark — single Link. Hover lifts the whole
+            brand (scale 1.10, slightly under the menu's 1.12 to keep
+            it anchored/editorial) and triggers the ray sway via the
+            .logoGroup hover-root (see MeridianaLogo.module.css). */}
+        <Link
+          href="/"
+          className={`flex items-center gap-2.5 font-serif text-xl transition-all duration-200 ease-out hover:scale-[1.10] ${logoStyles.logoGroup}`}
+        >
           <MeridianaLogo size={28} />
           <span className="text-meridiana-black font-semibold">Meridiana</span>
-        </a>
+        </Link>
 
         {/* Desktop nav */}
         <ul className="hidden md:flex items-center gap-8 text-sm">
@@ -33,7 +41,7 @@ export default function Navbar({ active }: NavbarProps) {
             <li key={item.id}>
               <a
                 href={item.href}
-                className={`inline-block transition-all duration-200 ease-out pb-1 hover:scale-[1.08] hover:text-meridiana-yellow ${
+                className={`inline-block transition-all duration-200 ease-out pb-1 hover:scale-[1.12] hover:text-meridiana-yellow ${
                   active === item.id
                     ? "text-meridiana-black border-b-2 border-meridiana-yellow"
                     : "text-meridiana-text-secondary"

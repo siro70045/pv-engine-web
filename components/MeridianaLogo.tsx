@@ -1,3 +1,5 @@
+import styles from "./MeridianaLogo.module.css";
+
 interface MeridianaLogoProps {
   size?: number;
   className?: string;
@@ -42,19 +44,21 @@ export default function MeridianaLogo({
         strokeLinecap="round"
       />
 
-      {/* 5 sun rays — repositioned for new sun center */}
+      {/* 5 sun rays — repositioned for new sun center.
+          .ray + .rN drive the hover sway (see MeridianaLogo.module.css);
+          they all pivot around the shared logo center (16,25). */}
       {/* Center vertical */}
-      <line x1="16" y1="11" x2="16" y2="5"
+      <line x1="16" y1="11" x2="16" y2="5" className={`${styles.ray} ${styles.r1}`}
         stroke={sunColor} strokeWidth="2.5" strokeLinecap="round" />
       {/* ±36° from vertical */}
-      <line x1="10.5" y1="13" x2="8.5" y2="8"
+      <line x1="10.5" y1="13" x2="8.5" y2="8" className={`${styles.ray} ${styles.r2}`}
         stroke={sunColor} strokeWidth="2.5" strokeLinecap="round" />
-      <line x1="21.5" y1="13" x2="23.5" y2="8"
+      <line x1="21.5" y1="13" x2="23.5" y2="8" className={`${styles.ray} ${styles.r3}`}
         stroke={sunColor} strokeWidth="2.5" strokeLinecap="round" />
       {/* ±72° from vertical */}
-      <line x1="7" y1="17" x2="3.5" y2="15"
+      <line x1="7" y1="17" x2="3.5" y2="15" className={`${styles.ray} ${styles.r4}`}
         stroke={sunColor} strokeWidth="2.5" strokeLinecap="round" />
-      <line x1="25" y1="17" x2="28.5" y2="15"
+      <line x1="25" y1="17" x2="28.5" y2="15" className={`${styles.ray} ${styles.r5}`}
         stroke={sunColor} strokeWidth="2.5" strokeLinecap="round" />
 
       {/* Gnomon — chunkier yellow pin sitting ON the horizon */}
