@@ -33,18 +33,23 @@ Definiti in `app/globals.css` via `@theme`:
 - **Sito editoriale magazine (questo), simulatore mobile-app (futuro)** — decisione 9 mag 2026. Sito mantiene tono caldo-narrativo + tecnico-rigoroso per credibilità istituzionale. Simulatore futuro userà card morbide, border-radius generosi, sans-only.
 - **TypeScript strict, no `any`**. Tipi delle API in `lib/types.ts` riusabili.
 - **No browser storage in artifacts**: localStorage/sessionStorage evitati. Stato in React state.
+- **Illustrazioni "Per chi è"**: PNG con alpha trasparente, dimensione nativa 1382×752 (aspect-ratio `1382/752`), in `public/images/per-chi/`. Mai croppate (`object-contain`).
+- **Numerale gigante rimosso**: il design originale della sezione "Per chi è" prevedeva grandi numerali decorativi (1, 2, 3) dietro le illustrazioni; rimossi in iterazione — decisione di Sirot — per rendere l'illustrazione l'elemento visivo primario.
+- **Animazioni scroll**: parallax via CSS scroll-driven native (`animation-timeline: view()`) in CSS Module, gated da `@supports` (fallback statico su browser senza supporto, es. Safari ≤18) + `prefers-reduced-motion` + breakpoint desktop. Stack coerente tra PerChiCard e IntroSection.
 
-## Stato attuale (13 mag 2026)
+## Stato attuale (19 mag 2026)
 
 - Setup Next.js + deploy Vercel funzionante
 - Hero homepage con foto borgo, 3 banner glass, linee SVG di connessione
 - Navbar glass + logo Meridiana custom SVG + Footer
-- Sezione "Cosa fa Meridiana" (IntroSection)
+- Sezione "Cosa fa Meridiana" (IntroSection) — con parallax leggero su blocco testo (~±20px, solo desktop, reduced-motion safe)
+- Sezione "Per chi è" (3 blocchi zig-zag Casa/Scuole/Aziende con illustrazioni isometriche, hover scale/saturate/shadow + scroll parallax) — COMPLETATA
+- Navbar: hover scale 1.12 sulle voci; logo+wordmark Meridiana con hover scale 1.10 + oscillazione dei 5 raggi (reduced-motion safe)
 - Pagina `/status` interna (diagnostica API)
 
 ## Sezioni mancanti / Roadmap sito
 
-- [ ] Sezione "Per chi è" (3 card Scuole/Casa/Aziende) sotto IntroSection
+- [x] ~~Sezione "Per chi è" (3 card Scuole/Casa/Aziende) sotto IntroSection~~ — COMPLETATA (zig-zag, illustrazioni isometriche, parallax + hover)
 - [ ] Pagina `/scuole`
 - [ ] Pagina `/casa`
 - [ ] Pagina `/aziende`
@@ -58,6 +63,11 @@ Definiti in `app/globals.css` via `@theme`:
 
 - Linee SVG connessione banner-edifici puntano correttamente agli edifici solo a risoluzione ~1400px. Su full-screen 2560+ i punti destinazione sono leggermente off (foto in `object-cover`, crop dinamico). Decisione 13 mag 2026: lasciare così, è dettaglio decorativo, non bloccante.
 - Voci navbar puntano a `/scuole`, `/casa`, ecc. ma quelle pagine non esistono ancora → 404 al click. Comportamento atteso fino a quando le pagine vengono create.
+- Pagine `/casa`, `/scuole`, `/aziende` non ancora create: i 3 blocchi della sezione "Per chi è" (oltre alle voci navbar) linkano lì → 404 **by design** fino allo sviluppo futuro di quelle pagine.
+- ⚠ Numeri hero banner (120.000 kWh) allineati al valore 
+  conservativo dichiarato, non al motore standalone (131.763). 
+  Da riconciliare quando si risolve la discrepanza tracciata 
+  nel CLAUDE.md di pv_engine.
 
 ## Convenzioni codice
 
