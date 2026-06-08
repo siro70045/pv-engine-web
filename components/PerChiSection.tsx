@@ -28,7 +28,7 @@ const voci: PerChiVoce[] = [
     statoTipo: "attivo",
     titolo: "Non è solo energia per le scuole.",
     corpo:
-      "Meridiana è già operativa per le scuole, con profili specifici per il tuo istituto, calendari regionali, incentivi. Non ti dirà solo se conviene o no montare un impianto. Meridiana include attività didattiche collegate al curricolo, volte all'educazione alla sostenibilità dei bambini.",
+      "Meridiana è già operativa per le scuole, con profili specifici per il tuo istituto, calendari regionali, incentivi. Non ti dirà solo se conviene o no montare un impianto: includerà attività didattiche collegate al curricolo, volte all'educazione alla sostenibilità dei bambini.",
     imageSrc: "/images/per-chi/scuola.png",
     imageAlt: "Illustrazione isometrica di una scuola con impianto fotovoltaico",
     href: "/scuole",
