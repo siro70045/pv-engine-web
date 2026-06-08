@@ -1,0 +1,65 @@
+/* Scroll parallax for the Hero background photo (the Italian
+   borgo). Only the photo moves — the gradient overlay, top/bottom
+   fades, SVG connection lines and the 3 glass banners stay static,
+   so the borgo "breathes" while the banners appear anchored.
+
+   TIMELINE — scroll(root), NOT view():
+   The Hero sits at the very top of the page and is already fully
+   visible at scroll 0. A view() timeline measures an element's
+   entry/exit through the viewport, so for an above-the-fold
+   element it is already ~50% advanced at load and only its tail
+   is reachable by scrolling — the parallax was therefore weak /
+   imperceptible (this is the bug Sirot saw in DevTools).
+   scroll(root) instead binds progress to the document's own
+   scroll. We map the full ±38px over the first 780px of page
+   scroll (animation-range: 0 780px), which is the Hero height at
+   lg+ (md:h-[780px] in Hero.tsx — and the parallax is gated to
+   ≥1024px). So at scroll 0 the photo is at -38px and it drifts
+   to +38px exactly as the Hero scrolls out: full, visible range.
+
+   Range: ±38px (~76px total). Calibrated previously by Sirot;
+   on the same order as PerChiSection's ±40px, kept just under 40
+   to stay calm on the first-impression Hero.
+
+   Edge handling (DECISIONE 6): .heroPhoto overscans the section
+   by 60px top and bottom (60px > the 38px travel, with margin,
+   and it also clears the 16/24px fades). The section has
+   overflow-hidden, which clips the overscan — the real photo
+   edges never emerge under the navbar or through the fades, in
+   any animation state (including the -38px load state).
+
+   Isolated + trivially removable: delete this file, its import in
+   Hero.tsx, and unwrap the <Image> from the styles.heroPhoto div.
+
+   Graceful fallback: the animation is applied ONLY inside
+   @supports (animation-timeline: scroll()). Browsers without
+   scroll-driven animations (e.g. Safari ≤ 18 as of mid-2026)
+   ignore it and the photo stays statically overscanned (still
+   fully covers the section — no edge, no broken offset). Gated
+   (inside @supports) to lg+ (≥1024px) and to users who have not
+   requested reduced motion. */
+
+.heroPhoto {
+  position: absolute;
+  inset: -60px 0;
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+    .heroPhoto {
+      animation: heroParallax linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 780px;
+      will-change: transform;
+    }
+  }
+}
+
+@keyframes heroParallax {
+  from {
+    transform: translateY(-38px);
+  }
+  to {
+    transform: translateY(38px);
+  }
+}

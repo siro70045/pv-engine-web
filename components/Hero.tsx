@@ -1,17 +1,29 @@
 import Image from "next/image";
+import styles from "./Hero.module.css";
 
 export default function Hero() {
   return (
     <section className="relative w-full h-[85vh] min-h-[720px] md:h-[780px] overflow-hidden">
-      {/* Background image */}
-      <Image
-        src="/hero-borgo.jpg"
-        alt="Borgo italiano al tramonto"
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-center"
-      />
+      {/* Background image — wrapped for a noticeable scroll parallax.
+          The transform is on this wrapper div (NOT the <Image>, whose
+          internal <img> would not pick up the class). Driven by
+          scroll(root) over the first 780px of page scroll — view()
+          was wrong here because the Hero is above the fold. The
+          wrapper overscans the section by 60px top/bottom so the
+          ±38px translate never reveals an edge under the navbar / fades
+          (overflow-hidden on the section clips the overscan). Only this
+          photo moves; overlay, fades, SVG lines and banners stay static.
+          See Hero.module.css. */}
+      <div className={styles.heroPhoto}>
+        <Image
+          src="/hero-borgo.jpg"
+          alt="Borgo italiano al tramonto"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+      </div>
 
       {/* Gradient overlay for readability */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/65 via-black/40 to-black/15" />
