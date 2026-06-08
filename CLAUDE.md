@@ -37,22 +37,24 @@ Definiti in `app/globals.css` via `@theme`:
 - **Numerale gigante rimosso**: il design originale della sezione "Per chi è" prevedeva grandi numerali decorativi (1, 2, 3) dietro le illustrazioni; rimossi in iterazione — decisione di Sirot — per rendere l'illustrazione l'elemento visivo primario.
 - **Animazioni scroll**: parallax via CSS scroll-driven native (`animation-timeline: view()`) in CSS Module, gated da `@supports` (fallback statico su browser senza supporto, es. Safari ≤18) + `prefers-reduced-motion` + breakpoint desktop. Stack coerente tra PerChiCard e IntroSection.
 
-## Stato attuale (19 mag 2026)
+## Stato attuale (9 giu 2026)
 
 - Setup Next.js + deploy Vercel funzionante
-- Hero homepage con foto borgo, 3 banner glass, linee SVG di connessione
+- Hero homepage con foto borgo, 3 banner glass, linee SVG di connessione — con scroll parallax sulla foto (±38px su scroll(root), reduced-motion safe)
 - Navbar glass + logo Meridiana custom SVG + Footer
 - Sezione "Cosa fa Meridiana" (IntroSection) — con parallax leggero su blocco testo (~±20px, solo desktop, reduced-motion safe)
 - Sezione "Per chi è" (3 blocchi zig-zag Casa/Scuole/Aziende con illustrazioni isometriche, hover scale/saturate/shadow + scroll parallax) — COMPLETATA
 - Navbar: hover scale 1.12 sulle voci; logo+wordmark Meridiana con hover scale 1.10 + oscillazione dei 5 raggi (reduced-motion safe)
+- **Pagina `/scuole`** (segmento operativo primario) — 5 sezioni: Hero con foto scuola, Intro + 3 bottoni navigatori, "Come funziona" (4 passi), "Il programma educativo" (in arrivo autunno 2026), "Calibrato per le scuole" (calendario/occupazione/consumo). Fade-in di entrata one-shot per sezione (stagger eyebrow/titolo/corpo, reduced-motion safe) + smooth scroll tra bottoni e ancore. Componenti in `components/scuole/`. COMPLETATA
+- Pagine `/casa` e `/aziende` — placeholder "IN ARRIVO" (componente `InArrivoPlaceholder`), in attesa di sviluppo
 - Pagina `/status` interna (diagnostica API)
 
 ## Sezioni mancanti / Roadmap sito
 
 - [x] ~~Sezione "Per chi è" (3 card Scuole/Casa/Aziende) sotto IntroSection~~ — COMPLETATA (zig-zag, illustrazioni isometriche, parallax + hover)
-- [ ] Pagina `/scuole`
-- [ ] Pagina `/casa`
-- [ ] Pagina `/aziende`
+- [x] ~~Pagina `/scuole`~~ — COMPLETATA (5 sezioni editoriali, fade-in entry, smooth scroll)
+- [ ] Pagina `/casa` — placeholder "IN ARRIVO" attivo, contenuto da sviluppare
+- [ ] Pagina `/aziende` — placeholder "IN ARRIVO" attivo, contenuto da sviluppare
 - [ ] Pagina `/magazine` (lista articoli)
 - [ ] Pagina `/metodologia`
 - [ ] Pagina `/storia` (fondatore)
@@ -62,8 +64,7 @@ Definiti in `app/globals.css` via `@theme`:
 ## Problemi noti
 
 - Linee SVG connessione banner-edifici puntano correttamente agli edifici solo a risoluzione ~1400px. Su full-screen 2560+ i punti destinazione sono leggermente off (foto in `object-cover`, crop dinamico). Decisione 13 mag 2026: lasciare così, è dettaglio decorativo, non bloccante.
-- Voci navbar puntano a `/scuole`, `/casa`, ecc. ma quelle pagine non esistono ancora → 404 al click. Comportamento atteso fino a quando le pagine vengono create.
-- Pagine `/casa`, `/scuole`, `/aziende` non ancora create: i 3 blocchi della sezione "Per chi è" (oltre alle voci navbar) linkano lì → 404 **by design** fino allo sviluppo futuro di quelle pagine.
+- Voci navbar e card "Per chi è" puntano a `/scuole`, `/casa`, `/aziende`: ora tutte e tre esistono (più nessun 404). `/scuole` è completa; `/casa` e `/aziende` mostrano un placeholder "IN ARRIVO" finché non vengono sviluppate.
 - ⚠ Numeri hero banner (120.000 kWh) allineati al valore 
   conservativo dichiarato, non al motore standalone (131.763). 
   Da riconciliare quando si risolve la discrepanza tracciata 
