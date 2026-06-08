@@ -1,0 +1,50 @@
+/* One-shot entrance reveal for /scuole sections. Opacity 0→1 +
+   translateY 24px→0 over 700ms ease-out, toggled exactly once via
+   IntersectionObserver (see Reveal.tsx) so it never replays when the
+   user scrolls away and back.
+
+   NOTE — different technique from IntroSection/PerChiCard. Those use
+   native scroll-driven animations (animation-timeline: view()), which
+   are bound to scroll position and therefore *reverse* on scroll-back.
+   A one-shot entrance cannot be expressed that way, so this needs JS
+   (IntersectionObserver). The visual character (subtle Y + fade) stays
+   coherent with the rest of the site.
+
+   Stagger is applied per element with the .d100 / .d200 modifiers
+   (transition-delay). All kept here (not Tailwind delay-*) so the
+   reveal is fully self-contained and free of cascade-layer surprises.
+
+   Reduced motion: content is shown immediately, no transform, no
+   transition — handled in CSS so it holds even before hydration. */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  /* longhand (not the `transition` shorthand) so it never resets
+     transition-delay set by .d100 / .d200 */
+  transition-property: opacity, transform;
+  transition-duration: 700ms;
+  transition-timing-function: ease-out;
+  will-change: opacity, transform;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.d100 {
+  transition-delay: 100ms;
+}
+
+.d200 {
+  transition-delay: 200ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
