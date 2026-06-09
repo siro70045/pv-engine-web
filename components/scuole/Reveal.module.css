@@ -1,36 +1,36 @@
-/* One-shot entrance reveal for /scuole sections. Opacity 0→1 +
-   translateY 24px→0 over 700ms ease-out, toggled exactly once via
-   IntersectionObserver (see Reveal.tsx) so it never replays when the
-   user scrolls away and back.
+/* Progressive-enhancement entrance reveal for /scuole sections.
 
-   NOTE — different technique from IntroSection/PerChiCard. Those use
-   native scroll-driven animations (animation-timeline: view()), which
-   are bound to scroll position and therefore *reverse* on scroll-back.
-   A one-shot entrance cannot be expressed that way, so this needs JS
-   (IntersectionObserver). The visual character (subtle Y + fade) stays
-   coherent with the rest of the site.
+   CRITICAL: the SSR markup is VISIBLE by default — there is no opacity:0
+   on the base class. Content is hidden ONLY after the client JS arms it
+   (see Reveal.tsx). So if JS never runs (cache, Safari quirks, content
+   blockers, hydration errors) the content stays visible — it just isn't
+   animated. This replaces the previous fragile pattern where opacity:0
+   lived in the markup and an empty page resulted whenever JS failed.
 
-   Stagger is applied per element with the .d100 / .d200 modifiers
-   (transition-delay). All kept here (not Tailwind delay-*) so the
-   reveal is fully self-contained and free of cascade-layer surprises.
-
-   Reduced motion: content is shown immediately, no transform, no
-   transition — handled in CSS so it holds even before hydration. */
+   The hide (.hidden) carries NO transition, so arming is instant (no
+   fade-out). Only the reveal (.visible) carries the transition, so the
+   entrance animates from hidden → visible. Stagger via .d100 / .d200
+   (transition-delay, applied together with .visible). */
 
 .reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  /* longhand (not the `transition` shorthand) so it never resets
-     transition-delay set by .d100 / .d200 */
-  transition-property: opacity, transform;
-  transition-duration: 700ms;
-  transition-timing-function: ease-out;
+  /* marker only; visible by default — no opacity/transform here */
   will-change: opacity, transform;
 }
 
+/* Armed hidden state — applied by JS before paint. No transition here,
+   so going visible → hidden is instantaneous (no flash-out). */
+.hidden {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+/* Revealed state — carries the transition, so hidden → visible animates. */
 .visible {
   opacity: 1;
   transform: translateY(0);
+  transition-property: opacity, transform;
+  transition-duration: 700ms;
+  transition-timing-function: ease-out;
 }
 
 .d100 {
@@ -41,10 +41,14 @@
   transition-delay: 200ms;
 }
 
+/* Reduced motion: JS already skips arming (content stays visible), but
+   keep this as a belt-and-suspenders guard against any hidden state. */
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .hidden {
     opacity: 1;
     transform: none;
+  }
+  .visible {
     transition: none;
   }
 }

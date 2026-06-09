@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import styles from "./Reveal.module.css";
 
 interface RevealProps {
@@ -17,24 +17,36 @@ const DELAY_CLASS: Record<number, string> = {
   200: styles.d200,
 };
 
-// One-shot viewport-entry reveal. Fades/slides its children in the first
-// time they enter the viewport, then disconnects so it never replays.
-// Reduced motion is handled entirely in CSS (Reveal.module.css), so we
-// also skip the observer in that case — content stays visible from paint.
+// useLayoutEffect runs before paint (no flash) on the client, but warns
+// during SSR. Fall back to useEffect on the server, where it is a no-op.
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
+// Progressive-enhancement entry reveal. The SSR markup is VISIBLE by
+// default ("idle"): if JS never runs, the content is always shown — it
+// just isn't animated. On the client, a layout effect arms the hidden
+// state before paint, then an IntersectionObserver reveals it once. So a
+// JS/hydration failure degrades to "visible, no animation" instead of an
+// empty page (the previous fragile behavior).
 export default function Reveal({ children, delay = 0, className = "" }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  // idle = visible (SSR / no-JS) · hidden = armed, awaiting viewport · visible = revealed
+  const [state, setState] = useState<"idle" | "hidden" | "visible">("idle");
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
 
+    // Respect reduced motion: stay visible (idle), no animation.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    // Arm before paint so the entrance can animate without a flash-out.
+    setState("hidden");
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setVisible(true);
+          setState("visible");
           observer.disconnect(); // one-shot
         }
       },
@@ -46,7 +58,8 @@ export default function Reveal({ children, delay = 0, className = "" }: RevealPr
 
   const classes = [
     styles.reveal,
-    visible ? styles.visible : "",
+    state === "hidden" ? styles.hidden : "",
+    state === "visible" ? styles.visible : "",
     DELAY_CLASS[delay],
     className,
   ]
