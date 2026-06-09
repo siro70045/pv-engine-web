@@ -43,7 +43,7 @@ export default function Hero() {
         <div className="max-w-2xl">
           {/* Eyebrow */}
           <p className="text-meridiana-yellow text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-6">
-            — Analisi tecno-economica · Italia
+            — Analisi tecnico-economica · Italia
           </p>
 
           {/* Title with italic */}
@@ -53,7 +53,7 @@ export default function Hero() {
 
           {/* Subtitle + inline "Scopri come funziona" */}
           <p className="text-meridiana-cream/85 text-base md:text-lg leading-relaxed max-w-xl">
-            Meridiana calcola se il fotovoltaico ha senso per la tua casa, la tua scuola o la tua azienda. Numeri reali, dati certificati, risposta onesta — anche quando è no.{" "}
+            Meridiana calcola se il fotovoltaico ha senso per la tua casa, la tua scuola o la tua azienda. Offre una stima tecnico-economica e una risposta onesta — anche quando è no.{" "}
             <a
               href="#come-funziona"
               className="text-meridiana-cream hover:text-meridiana-yellow underline underline-offset-4 decoration-meridiana-cream/40 hover:decoration-meridiana-yellow transition-colors whitespace-nowrap"
