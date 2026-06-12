@@ -1,6 +1,7 @@
 "use client";
 
-import type { EstimateResponse } from "@/lib/types";
+import type { EstimateResponse, LeadStimaContext } from "@/lib/types";
+import LeadForm from "./LeadForm";
 
 // Result view — replaces the form on the same route. Ephemeral by design:
 // "Modifica i dati" returns to the form with selections preserved.
@@ -9,7 +10,14 @@ import type { EstimateResponse } from "@/lib/types";
 // reserved for the full report. Rounding is presentation-only: the API
 // stays precise.
 
-const LEAD_EMAIL = "nicola.sirotti.07@gmail.com"; // provisional mailto target
+// Human-readable labels of the submitted form inputs, provided by StimaFlow
+// (the response carries only resolved values, not the visitor's selections);
+// echoed in the lead email so the estimate can be reconstructed.
+export interface StimaInputLabels {
+  tipologia: string;
+  studenti: string;
+  anno: string;
+}
 
 const nf0 = new Intl.NumberFormat("it-IT", { maximumFractionDigits: 0 });
 const nf1 = new Intl.NumberFormat("it-IT", {
@@ -84,9 +92,11 @@ function StatCard({
 
 export default function ResultView({
   result,
+  inputLabels,
   onBack,
 }: {
   result: EstimateResponse;
+  inputLabels: StimaInputLabels;
   onBack: () => void;
 }) {
   const r = result;
@@ -101,9 +111,22 @@ export default function ResultView({
       ? `circa ${formatYears(paybackLow)} anni`
       : `tra ${formatYears(paybackLow)} e ${formatYears(paybackHigh)} anni`;
 
-  const mailto = `mailto:${LEAD_EMAIL}?subject=${encodeURIComponent(
-    `Richiesta report completo — ${nome} (${provincia})`,
-  )}`;
+  const produzioneValue = `circa ${nf0.format(roundToThousands(r.produzione_annua_kwh.low))} kWh all'anno`;
+  const investimentoValue = `circa ${eur(roundToThousands(r.capex_indicativo_eur))}`;
+
+  // Estimate context echoed in the lead notification email: the inputs the
+  // visitor chose + the three figures exactly as displayed on this page.
+  const stimaContext: LeadStimaContext = {
+    comune: nome,
+    provincia,
+    tipologia: inputLabels.tipologia,
+    fascia_studenti: inputLabels.studenti,
+    fascia_anno: inputLabels.anno,
+    kwp: r.kwp_ipotizzato,
+    produzione: produzioneValue,
+    investimento: investimentoValue,
+    payback: paybackValue,
+  };
 
   return (
     <div className="space-y-4">
@@ -139,32 +162,19 @@ export default function ResultView({
         <StatCard
           hero
           label="Produzione annua"
-          value={`circa ${nf0.format(roundToThousands(r.produzione_annua_kwh.low))} kWh all'anno`}
+          value={produzioneValue}
           detail="Energia prodotta dall'impianto nel primo anno, calcolata sull'irraggiamento storico della tua zona."
         />
         <StatCard
           label="Investimento indicativo"
-          value={`circa ${eur(roundToThousands(r.capex_indicativo_eur))}`}
+          value={investimentoValue}
           detail="Listino per edifici pubblici, inclusa verifica strutturale, IVA inclusa."
         />
         <StatCard label="Tempo di rientro" value={paybackValue} />
       </div>
 
-      {/* Full-report tease + CTA */}
-      <div className="bg-meridiana-cream-light rounded-2xl p-6 md:p-8 shadow-[0_8px_30px_rgba(26,22,18,0.06)] text-center">
-        <p className="font-sans text-sm md:text-base text-meridiana-text-secondary leading-relaxed max-w-lg mx-auto">
-          Nel report completo: il beneficio economico anno per anno, la
-          CO&#8322; evitata, il confronto tra tre taglie d&apos;impianto, la
-          verifica della copertura, gli incentivi applicabili — in un
-          documento da allegare in delibera.
-        </p>
-        <a
-          href={mailto}
-          className="inline-block mt-6 w-full sm:w-auto sm:px-10 bg-meridiana-yellow hover:bg-meridiana-yellow-hover text-meridiana-black font-sans font-semibold text-base px-6 py-4 rounded-xl shadow-sm transition-all duration-200 ease-out active:scale-[0.98] hover:shadow-md motion-reduce:transition-none motion-reduce:active:scale-100"
-        >
-          Richiedi il report completo
-        </a>
-      </div>
+      {/* Full-report tease + inline lead form */}
+      <LeadForm stima={stimaContext} />
 
       {/* Honesty block */}
       <details className="group bg-white rounded-2xl shadow-[0_8px_30px_rgba(26,22,18,0.06)] overflow-hidden">

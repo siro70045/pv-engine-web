@@ -129,6 +129,14 @@ export default function StimaFlow() {
       {phase.kind === "result" && (
         <ResultView
           result={phase.data}
+          // Form state is preserved while the result is shown, so the labels
+          // of the submitted selections can be derived from it directly.
+          inputLabels={{
+            tipologia:
+              TIPOLOGIE.find((t) => t.value === tipologia)?.label ?? "—",
+            studenti: STUDENTI.find((s) => s.value === studenti)?.label ?? "—",
+            anno: ANNI.find((a) => a.value === anno)?.label ?? "—",
+          }}
           onBack={() => {
             setPhase({ kind: "form" });
             scrollToTop();

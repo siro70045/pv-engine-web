@@ -58,3 +58,45 @@ export interface ComuneEntry {
   n: string;
   p: string;
 }
+
+// ── POST /api/lead (richiesta report completo, Livello 2) ─────────────────────
+
+export const LEAD_RUOLI = [
+  "dirigente_scolastico",
+  "ente_locale",
+  "docente_genitore",
+  "altro",
+] as const;
+export type LeadRuolo = (typeof LEAD_RUOLI)[number];
+
+// Estimate context echoed back by the client so the notification email can
+// summarize what the visitor saw. Output figures are the DISPLAYED (rounded)
+// strings, not the precise API values — the email mirrors the page.
+export interface LeadStimaContext {
+  comune: string;
+  provincia: string;
+  tipologia: string;
+  fascia_studenti: string;
+  fascia_anno: string;
+  kwp: number;
+  produzione: string;
+  investimento: string;
+  payback: string;
+}
+
+export interface LeadRequest {
+  nome: string;
+  ruolo: LeadRuolo;
+  comune: string;
+  scuola?: string;
+  email: string;
+  telefono?: string;
+  note?: string;
+  website?: string; // honeypot — humans never see it, bots fill it
+  opened_at: number; // epoch ms when the form was expanded (time-trap)
+  stima: LeadStimaContext;
+}
+
+export interface LeadResponse {
+  ok: boolean;
+}

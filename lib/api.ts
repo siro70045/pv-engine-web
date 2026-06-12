@@ -33,3 +33,16 @@ export async function postEstimate(
   });
 }
 
+// Internal Next.js route (same origin), NOT the Railway backend: lead data
+// stays within our perimeter and the Resend key stays server-side.
+export async function postLead(
+  req: import("./types").LeadRequest,
+): Promise<import("./types").LeadResponse> {
+  const res = await fetch("/api/lead", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(req),
+  });
+  if (!res.ok) throw new ApiError(res.status, await res.text());
+  return res.json() as Promise<import("./types").LeadResponse>;
+}
