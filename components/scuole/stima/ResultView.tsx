@@ -29,12 +29,18 @@ function eur(v: number): string {
   return `€ ${nf0.format(v)}`;
 }
 
+// Production rounds to NEAREST; cost and payback round UP (Sirot's principle:
+// the right error under-promises — money and time round against us).
 function roundToThousands(v: number): number {
   return Math.round(v / 1000) * 1000;
 }
 
-function roundToHalfYear(v: number): number {
-  return Math.round(v * 2) / 2;
+function ceilToThousands(v: number): number {
+  return Math.ceil(v / 1000) * 1000;
+}
+
+function ceilToHalfYear(v: number): number {
+  return Math.ceil(v * 2) / 2;
 }
 
 function formatYears(v: number): string {
@@ -102,17 +108,17 @@ export default function ResultView({
   const r = result;
   const { nome, provincia } = r.comune_risolto;
 
-  // Payback rounded to the half year: when low and high collapse to the
+  // Payback ceiled to the half year: when low and high collapse to the
   // same value the range is noise, so show a single "circa" figure.
-  const paybackLow = roundToHalfYear(r.payback_anni.low);
-  const paybackHigh = roundToHalfYear(r.payback_anni.high);
+  const paybackLow = ceilToHalfYear(r.payback_anni.low);
+  const paybackHigh = ceilToHalfYear(r.payback_anni.high);
   const paybackValue =
     paybackLow === paybackHigh
       ? `circa ${formatYears(paybackLow)} anni`
       : `tra ${formatYears(paybackLow)} e ${formatYears(paybackHigh)} anni`;
 
   const produzioneValue = `circa ${nf0.format(roundToThousands(r.produzione_annua_kwh.low))} kWh all'anno`;
-  const investimentoValue = `circa ${eur(roundToThousands(r.capex_indicativo_eur))}`;
+  const investimentoValue = `circa ${eur(ceilToThousands(r.capex_indicativo_eur))}`;
 
   // Estimate context echoed in the lead notification email: the inputs the
   // visitor chose + the three figures exactly as displayed on this page.
