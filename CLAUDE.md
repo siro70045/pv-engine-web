@@ -12,10 +12,10 @@ Next.js 16+ App Router, TypeScript strict, Tailwind CSS v4 (CSS-first config via
 
 ## Struttura
 
-- `app/` — `layout.tsx`, `page.tsx`, `globals.css`, `status/page.tsx`
-- `components/` — `Navbar.tsx`, `Footer.tsx`, `Hero.tsx`, `IntroSection.tsx`, `HealthStatus.tsx`, `MeridianaLogo.tsx`
+- `app/` — `layout.tsx`, `page.tsx`, `globals.css`, `status/page.tsx`, `scuole/stima/page.tsx`, `api/lead/route.ts` (route handler interno)
+- `components/` — `Navbar.tsx`, `Footer.tsx`, `Hero.tsx`, `IntroSection.tsx`, `HealthStatus.tsx`, `MeridianaLogo.tsx`; `scuole/` (sezioni /scuole), `scuole/stima/` (simulatore: StimaFlow, ComuneAutocomplete, Pills, ResultView, LeadForm…)
 - `lib/` — `env.ts`, `api.ts`, `types.ts`
-- `public/` — `hero-borgo.jpg`
+- `public/` — `hero-borgo.jpg`, `data/comuni.json` (dataset ISTAT per autocomplete, lazy-fetched)
 
 ## Design tokens Meridiana
 
@@ -31,13 +31,17 @@ Definiti in `app/globals.css` via `@theme`:
 
 - **Full-stack-ready ma frontend-only oggi**: tutto il fetching passa per `lib/api.ts`. Quando in futuro serviranno API routes interne, database, auth, si aggiungono senza riscrivere componenti.
 - **Sito editoriale magazine (questo), simulatore mobile-app (futuro)** — decisione 9 mag 2026. Sito mantiene tono caldo-narrativo + tecnico-rigoroso per credibilità istituzionale. Simulatore futuro userà card morbide, border-radius generosi, sans-only.
+- **Design system simulatore (primo esemplare: /scuole/stima)** — app-like dentro il sito editoriale: card bianche/cream `rounded-2xl` con ombra diffusa, pillole al posto dei dropdown (`Pills`, tap target ≥44px), sans-only, giallo = selezione/CTA. Stesso linguaggio per ogni futuro flusso interattivo.
+- **Pagina risultato: 3 metriche + tease** — decisione 12 giu 2026. Mostra SOLO produzione annua (hero), investimento indicativo, tempo di rientro. Risparmio, cessione, beneficio, CO₂ e taglie sono riservati di proposito al report completo (tease card). Arrotondamenti SOLO in presentazione (migliaia, mezzo anno, prefisso "circa"); l'API resta precisa.
+- **Flusso lead via Resend + route handler interno** (`app/api/lead/route.ts`) — i dati dei lead restano nel nostro perimetro; `RESEND_API_KEY` e `LEAD_NOTIFICATION_EMAIL` solo server-side (mai `NEXT_PUBLIC`, vedi `.env.local.example`; da configurare anche su Vercel). Anti-spam silenzioso: honeypot off-screen + time-trap 3s, entrambi rispondono con finto successo. `from` sandbox `onboarding@resend.dev` (consegna solo all'owner dell'account finché non si verifica un dominio), `reply_to` = email del richiedente.
+- **Tailwind v4: `scale-*` emette la proprietà nativa `scale`** (non `transform`): nelle `transition-[...]` mirate va elencato `scale`, altrimenti niente animazione (`transition-all` lo maschera). Le varianti `hover:` sono già gated su `@media (hover: hover)`: il touch è escluso gratis.
 - **TypeScript strict, no `any`**. Tipi delle API in `lib/types.ts` riusabili.
 - **No browser storage in artifacts**: localStorage/sessionStorage evitati. Stato in React state.
 - **Illustrazioni "Per chi è"**: PNG con alpha trasparente, dimensione nativa 1382×752 (aspect-ratio `1382/752`), in `public/images/per-chi/`. Mai croppate (`object-contain`).
 - **Numerale gigante rimosso**: il design originale della sezione "Per chi è" prevedeva grandi numerali decorativi (1, 2, 3) dietro le illustrazioni; rimossi in iterazione — decisione di Sirot — per rendere l'illustrazione l'elemento visivo primario.
 - **Animazioni scroll**: parallax via CSS scroll-driven native (`animation-timeline: view()`) in CSS Module, gated da `@supports` (fallback statico su browser senza supporto, es. Safari ≤18) + `prefers-reduced-motion` + breakpoint desktop. Stack coerente tra PerChiCard e IntroSection.
 
-## Stato attuale (9 giu 2026)
+## Stato attuale (12 giu 2026)
 
 - Setup Next.js + deploy Vercel funzionante
 - Hero homepage con foto borgo, 3 banner glass, linee SVG di connessione — con scroll parallax sulla foto (±38px su scroll(root), reduced-motion safe)
@@ -47,12 +51,14 @@ Definiti in `app/globals.css` via `@theme`:
 - Navbar: hover scale 1.12 sulle voci; logo+wordmark Meridiana con hover scale 1.10 + oscillazione dei 5 raggi (reduced-motion safe)
 - **Pagina `/scuole`** (segmento operativo primario) — 5 sezioni: Hero con foto scuola, Intro + 3 bottoni navigatori, "Come funziona" (4 passi), "Il programma educativo" (in arrivo autunno 2026), "Calibrato per le scuole" (calendario/occupazione/consumo). Fade-in di entrata one-shot per sezione (stagger eyebrow/titolo/corpo, reduced-motion safe) + smooth scroll tra bottoni e ancore. Componenti in `components/scuole/`. COMPLETATA
 - Pagine `/casa` e `/aziende` — placeholder "IN ARRIVO" (componente `InArrivoPlaceholder`), in attesa di sviluppo
+- **Pagina `/scuole/stima`** (Fase C) — stima preliminare Livello 1: form app-like (autocomplete comuni ISTAT, pillole), risultato con 3 metriche arrotondate + tease report + accordion assunzioni, form lead Livello 2 inline (Resend via `/api/lead`, honeypot + time-trap). CTA in fondo a `/scuole`. COMPLETATA
 - Pagina `/status` interna (diagnostica API)
 
 ## Sezioni mancanti / Roadmap sito
 
 - [x] ~~Sezione "Per chi è" (3 card Scuole/Casa/Aziende) sotto IntroSection~~ — COMPLETATA (zig-zag, illustrazioni isometriche, parallax + hover)
 - [x] ~~Pagina `/scuole`~~ — COMPLETATA (5 sezioni editoriali, fade-in entry, smooth scroll)
+- [x] ~~Pagina `/scuole/stima` + form lead~~ — COMPLETATA (Fase C: stima Livello 1 + richiesta report via Resend)
 - [ ] Pagina `/casa` — placeholder "IN ARRIVO" attivo, contenuto da sviluppare
 - [ ] Pagina `/aziende` — placeholder "IN ARRIVO" attivo, contenuto da sviluppare
 - [ ] Pagina `/magazine` (lista articoli)
