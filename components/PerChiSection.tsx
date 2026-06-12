@@ -24,7 +24,7 @@ const voci: PerChiVoce[] = [
     orientamento: "illo-left",
   },
   {
-    stato: "GIÀ ATTIVO",
+    stato: "GIÀ ATTIVO - Estate 2026",
     statoTipo: "attivo",
     titolo: "Non è solo energia per le scuole.",
     corpo:

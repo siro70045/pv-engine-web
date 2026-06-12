@@ -63,17 +63,11 @@ export default function Navbar({ active }: NavbarProps) {
             ))}
           </ul>
 
-          {/* Right: lang + CTA */}
+          {/* Right: lang switcher */}
           <div className="hidden md:flex items-center gap-5">
             <span className="text-xs text-meridiana-text-tertiary tracking-wider">
               <span className="text-meridiana-text-secondary">IT</span> · <span className="opacity-50">EN</span>
             </span>
-            <a
-              href="/simulatore"
-              className="bg-meridiana-yellow hover:bg-meridiana-yellow-hover text-meridiana-black font-semibold text-sm px-5 py-2 rounded-full transition-colors"
-            >
-              Avvia simulatore →
-            </a>
           </div>
 
           {/* Mobile hamburger */}
@@ -120,15 +114,6 @@ export default function Navbar({ active }: NavbarProps) {
                   </a>
                 </li>
               ))}
-              <li className="mt-4 pt-6 border-t border-meridiana-border-light">
-                <a
-                  href="/simulatore"
-                  className="inline-block bg-meridiana-yellow hover:bg-meridiana-yellow-hover text-meridiana-black font-semibold text-base px-6 py-3 rounded-full transition-colors"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  Avvia simulatore →
-                </a>
-              </li>
             </ul>
           </div>
         </div>

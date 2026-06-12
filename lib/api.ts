@@ -23,3 +23,13 @@ async function fetchApi<T>(path: string, options?: RequestInit): Promise<T> {
 export async function getHealth(): Promise<HealthResponse> {
   return fetchApi<HealthResponse>("/health");
 }
+
+export async function postEstimate(
+  req: import("./types").EstimateRequest,
+): Promise<import("./types").EstimateResponse> {
+  return fetchApi("/estimate", {
+    method: "POST",
+    body: JSON.stringify(req),
+  });
+}
+

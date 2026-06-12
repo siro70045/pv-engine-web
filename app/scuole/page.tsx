@@ -4,6 +4,7 @@ import IntroScuole from "@/components/scuole/IntroScuole";
 import ComeFunziona from "@/components/scuole/ComeFunziona";
 import ProgrammaEducativo from "@/components/scuole/ProgrammaEducativo";
 import CalibratoScuole from "@/components/scuole/CalibratoScuole";
+import CtaStima from "@/components/scuole/CtaStima";
 
 export const metadata: Metadata = {
   title: "Meridiana — Scuole",
@@ -19,6 +20,7 @@ export default function ScuolePage() {
       <ComeFunziona />
       <ProgrammaEducativo />
       <CalibratoScuole />
+      <CtaStima />
     </>
   );
 }
