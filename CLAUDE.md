@@ -39,6 +39,7 @@ Definiti in `app/globals.css` via `@theme`:
 - **No browser storage in artifacts**: localStorage/sessionStorage evitati. Stato in React state.
 - **Illustrazioni "Per chi è"**: PNG con alpha trasparente, dimensione nativa 1382×752 (aspect-ratio `1382/752`), in `public/images/per-chi/`. Mai croppate (`object-contain`).
 - **Numerale gigante rimosso**: il design originale della sezione "Per chi è" prevedeva grandi numerali decorativi (1, 2, 3) dietro le illustrazioni; rimossi in iterazione — decisione di Sirot — per rendere l'illustrazione l'elemento visivo primario.
+- **Schema backend `/estimate/casa`** (verificato 13 set 2026): `n_occupants` e `floor_area_m2` sono SEMPRE richiesti dall'API (anche in bolletta mode, servono per la stima del tetto). Campo consumo = `bolletta_kwh` (non `consumo_kwh`). Auto elettrica = `ev`. IRPEF = `irpef_annua_stimata`. Orientamento: `sud_est_sud_ovest`, `est_o_ovest`, `non_so`. La response usa `verdetto_pv.etichetta`+`testo` (non `verdetto`/`testo` al top level). `produzione_annua_kwh` è un numero scalare (non range). Scenari: `senza_batteria.capex_eur`, `senza_batteria.payback_anni` scalare (non range). `taglie_confronto[].label` (non `etichetta`), `capex_eur`, `autosufficienza_pct`.
 - **Animazioni scroll**: parallax via CSS scroll-driven native (`animation-timeline: view()`) in CSS Module, gated da `@supports` (fallback statico su browser senza supporto, es. Safari ≤18) + `prefers-reduced-motion` + breakpoint desktop. Stack coerente tra PerChiCard e IntroSection.
 
 ## Stato attuale (12 giu 2026)
@@ -50,8 +51,10 @@ Definiti in `app/globals.css` via `@theme`:
 - Sezione "Per chi è" (3 blocchi zig-zag Casa/Scuole/Aziende con illustrazioni isometriche, hover scale/saturate/shadow + scroll parallax) — COMPLETATA
 - Navbar: hover scale 1.12 sulle voci; logo+wordmark Meridiana con hover scale 1.10 + oscillazione dei 5 raggi (reduced-motion safe)
 - **Pagina `/scuole`** (segmento operativo primario) — 5 sezioni: Hero con foto scuola, Intro + 3 bottoni navigatori, "Come funziona" (4 passi), "Il programma educativo" (in arrivo autunno 2026), "Calibrato per le scuole" (calendario/occupazione/consumo). Fade-in di entrata one-shot per sezione (stagger eyebrow/titolo/corpo, reduced-motion safe) + smooth scroll tra bottoni e ancore. Componenti in `components/scuole/`. COMPLETATA
-- Pagine `/casa` e `/aziende` — placeholder "IN ARRIVO" (componente `InArrivoPlaceholder`), in attesa di sviluppo
+- Pagina `/casa` — placeholder "IN ARRIVO", ma `/casa/stima` è COMPLETATA (vedi sotto)
+- Pagina `/aziende` — placeholder "IN ARRIVO" (componente `InArrivoPlaceholder`), in attesa di sviluppo
 - **Pagina `/scuole/stima`** (Fase C) — stima preliminare Livello 1: form app-like (autocomplete comuni ISTAT, pillole), risultato con 3 metriche arrotondate + tease report + accordion assunzioni, form lead Livello 2 inline (Resend via `/api/lead`, honeypot + time-trap). CTA in fondo a `/scuole`. COMPLETATA
+- **Pagina `/casa/stima`** (Fase 2) — stima residenziale Livello 1: form a divulgazione progressiva (6 step, ogni campo appare come conseguenza del precedente con animazione + smooth scroll), due percorsi consumo (bolletta diretta / proxy), risultato con verdetto Meridiana + 3 metriche + "cosa cambierebbe le cose" + confronto scenari batteria + tabella taglie + assunzioni accordion. Backend: POST `/estimate/casa` stesso host scuole. NESSUN form lead Livello 2 (solo nota testuale). Componenti in `components/casa/stima/`. COMPLETATA (13 set 2026)
 - Pagina `/status` interna (diagnostica API)
 
 ## Sezioni mancanti / Roadmap sito
@@ -59,7 +62,8 @@ Definiti in `app/globals.css` via `@theme`:
 - [x] ~~Sezione "Per chi è" (3 card Scuole/Casa/Aziende) sotto IntroSection~~ — COMPLETATA (zig-zag, illustrazioni isometriche, parallax + hover)
 - [x] ~~Pagina `/scuole`~~ — COMPLETATA (5 sezioni editoriali, fade-in entry, smooth scroll)
 - [x] ~~Pagina `/scuole/stima` + form lead~~ — COMPLETATA (Fase C: stima Livello 1 + richiesta report via Resend)
-- [ ] Pagina `/casa` — placeholder "IN ARRIVO" attivo, contenuto da sviluppare
+- [x] ~~Pagina `/casa/stima`~~ — COMPLETATA (Fase 2: form progressivo + risultato residenziale)
+- [ ] Pagina `/casa` — contenuto editoriale da sviluppare (placeholder attivo; `/casa/stima` già live)
 - [ ] Pagina `/aziende` — placeholder "IN ARRIVO" attivo, contenuto da sviluppare
 - [ ] Pagina `/magazine` (lista articoli)
 - [ ] Pagina `/metodologia`

@@ -100,3 +100,115 @@ export interface LeadRequest {
 export interface LeadResponse {
   ok: boolean;
 }
+
+// ── POST /estimate/casa (stima preliminare residenziale Livello 1) ─────────────
+
+export type CasaOrientamento =
+  | "sud"
+  | "sud_est_sud_ovest"
+  | "est_o_ovest"
+  | "nord"
+  | "non_so";
+
+export type CasaPresenzaDiurna = "per_lo_piu_vuota" | "spesso_occupata";
+
+export type CasaVerdetto =
+  | "ottimo"
+  | "buono"
+  | "accettabile"
+  | "marginale"
+  | "negativo";
+
+export interface CasaEstimateRequest {
+  comune: string;
+  provincia?: string;
+  // Always required (used for roof area + consumption estimation)
+  n_occupants: number;
+  floor_area_m2: number;
+  // Consumption: direct kWh (optional, wins over proxy when provided)
+  bolletta_kwh?: number;
+  // Proxy consumption factors (optional, defaulted to false)
+  riscaldamento_elettrico?: boolean;
+  acqua_calda_elettrica?: boolean;
+  ev?: boolean;
+  condizionatore?: boolean;
+  // Defaults provided by backend when omitted
+  presenza_diurna?: CasaPresenzaDiurna;
+  orientamento?: CasaOrientamento;
+  abitazione_principale?: boolean;
+  potenza_kwp?: number;
+  irpef_annua_stimata?: number;
+  // Heat-pump electrification scenario (optional)
+  terminali?: string; // termosifoni | pavimento_radiante | ventilconvettori | non_so
+  gas_smc_annui?: number;
+  gas_smc_estivi_mese?: number;
+}
+
+export interface CasaScenario {
+  label: string;
+  capex_eur: number;
+  battery_kwh: number;
+  autoconsumo_pct: number;
+  autosufficienza_pct: number;
+  payback_anni: number;
+  npv_eur: number;
+  // Deduction breakdown (may be absent on older backend versions)
+  detrazione_totale_eur?: number;
+  detrazione_effettiva_eur?: number;
+}
+
+export interface CasaTaglia {
+  label: string;
+  kwp: number;
+  capex_eur: number;
+  produzione_annua_kwh: number;
+  autosufficienza_pct: number;
+  payback_anni: number;
+  npv_eur: number;
+}
+
+export interface CasaVerdettoPV {
+  payback_anni: number;
+  npv_eur: number;
+  etichetta: CasaVerdetto;
+  autosufficienza_pct: number;
+  testo: string;
+}
+
+export interface CasaScenarioAlternativo {
+  tipo: "elettrificazione";
+  titolo: string;
+  descrizione: string;
+  metriche: {
+    consumo_elettrico_stimato_kwh: number;
+    kwp_consigliato: number;
+  };
+  delta_vs_base: {
+    npv_eur: number;
+    payback_anni: number;
+    autosufficienza_pp: number; // percentage points
+  };
+}
+
+export interface CasaEstimateResponse {
+  comune_risolto: {
+    nome: string;
+    provincia: string;
+    regione: string;
+    zona_climatica: string;
+  };
+  consumo_kwh_annuo: number;
+  consumo_da_bolletta: boolean;
+  kwp_ipotizzato: number;
+  auto_dimensionato: boolean;
+  produzione_annua_kwh: number;
+  co2_evitata_kg_anno?: number;
+  payback_anni: RangeLowHigh;
+  capex_indicativo_eur: number;
+  senza_batteria: CasaScenario;
+  con_batteria: CasaScenario;
+  verdetto_pv: CasaVerdettoPV;
+  taglie_confronto: CasaTaglia[];
+  assunzioni: string[];
+  scenari_alternativi?: CasaScenarioAlternativo[];
+}

@@ -33,6 +33,15 @@ export async function postEstimate(
   });
 }
 
+export async function postCasaEstimate(
+  req: import("./types").CasaEstimateRequest,
+): Promise<import("./types").CasaEstimateResponse> {
+  return fetchApi("/estimate/casa", {
+    method: "POST",
+    body: JSON.stringify(req),
+  });
+}
+
 // Internal Next.js route (same origin), NOT the Railway backend: lead data
 // stays within our perimeter and the Resend key stays server-side.
 export async function postLead(
