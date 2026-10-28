@@ -19,8 +19,10 @@ function eur(v: number) {
   return `€ ${nf0.format(v)}`;
 }
 
-function ceilToThousands(v: number) {
-  return Math.ceil(v / 1000) * 1000;
+// Investment is rounded UP to the hundred: conservative (cost never understated)
+// but fine enough that the 50% deduction shown next to it stays visibly 50%.
+function ceilToHundreds(v: number) {
+  return Math.ceil(v / 100) * 100;
 }
 
 function ceilToHalfYear(v: number) {
@@ -39,8 +41,10 @@ function paybackRange(low: number, high: number) {
     : `tra ${formatYears(l)} e ${formatYears(h)} anni`;
 }
 
+// Self-sufficiency is rounded DOWN to the whole percent: a benefit is never
+// overstated, and the value stays consistent with the 35% verdict threshold.
 function roundPct(v: number) {
-  return Math.round(v / 5) * 5;
+  return Math.floor(v);
 }
 
 // ── verdetto ───────────────────────────────────────────────────────────────────
@@ -343,7 +347,7 @@ function DifesaSection({
             dovrebbe costare indicativamente:
           </p>
           <p className="font-sans text-2xl font-semibold text-meridiana-black my-2">
-            {eur(ceilToThousands(capex))}
+            {eur(ceilToHundreds(capex))}
           </p>
           <p className="font-sans text-sm text-meridiana-text-secondary leading-relaxed">
             Fascia ragionevole:{" "}
@@ -426,7 +430,7 @@ export default function CasaResultView({
   const verdLabel = VERDETTO_LABEL[verdetto];
   const verdBorder = VERDETTO_BORDER[verdetto];
 
-  const investimentoValue = `circa ${eur(ceilToThousands(r.capex_indicativo_eur))}`;
+  const investimentoValue = `circa ${eur(ceilToHundreds(r.capex_indicativo_eur))}`;
   const paybackValue = paybackRange(r.payback_anni.low, r.payback_anni.high);
   const autosuffValue = `circa ${roundPct(r.verdetto_pv.autosufficienza_pct)}%`;
 
@@ -574,7 +578,7 @@ export default function CasaResultView({
                     Investimento
                   </p>
                   <p className="font-sans text-base font-semibold text-meridiana-black">
-                    {eur(ceilToThousands(s.capex_eur))}
+                    {eur(ceilToHundreds(s.capex_eur))}
                   </p>
                 </div>
                 <div>
@@ -654,7 +658,7 @@ export default function CasaResultView({
                       {nf1.format(t.kwp)}
                     </td>
                     <td className="px-4 py-3 text-meridiana-text-secondary">
-                      {eur(ceilToThousands(t.capex_eur))}
+                      {eur(ceilToHundreds(t.capex_eur))}
                     </td>
                     <td className="px-4 py-3 text-meridiana-text-secondary">
                       {roundPct(t.autosufficienza_pct)}%
