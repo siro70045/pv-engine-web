@@ -168,8 +168,9 @@ function computeLeve(
     result.verdetto_pv.etichetta,
   );
   if (isPositive) {
+    const aliquota = ctx.abitazionePrincipale ? 50 : 36;
     leve.push(
-      "La detrazione al 50% vale per le spese sostenute nel 2026; dal 2027 è prevista al 36%.",
+      `La detrazione al ${aliquota}% è garantita per le spese sostenute entro il 31 dicembre 2026; per il 2027 la conferma dipende dalla legge di bilancio in discussione.`,
     );
   }
 
@@ -386,7 +387,7 @@ function DifesaSection({
         <Card num="03" title="Come funziona la detrazione">
           <p className="font-sans text-sm text-meridiana-text-secondary leading-relaxed">
             La detrazione{" "}
-            <strong>{aliquota}%</strong> non è uno sconto in fattura: paghi
+            <strong>{aliquota}%</strong>{" "}non è uno sconto in fattura: paghi
             l&apos;intero importo e recuperi la quota in dieci dichiarazioni dei
             redditi consecutive.
           </p>
@@ -398,9 +399,17 @@ function DifesaSection({
             <strong>{eur(Math.round(totEffettivo))}</strong>
             {!isCapFull && " — limitato dall'IRPEF dichiarata"}.
           </p>
+          {/* Legal basis — keep in sync with the budget law. Rates 2026:
+              50% main residence / 36% other homes (L. 199/2025). Without an
+              extension, 2027 drops to 36% / 30%; the 2027 budget bill (DDL,
+              Oct 2026) proposes keeping 50% / 36%. Update once it's law. */}
           <p className="font-sans text-sm text-meridiana-text-secondary mt-2 leading-relaxed">
-            Il 50% è valido per le spese sostenute nel 2026 (L. 207/2024). Dal
-            2027 l&apos;aliquota scende al 36%, salvo proroga parlamentare.
+            {inputCtx.abitazionePrincipale
+              ? "Il 50% spetta sull'abitazione principale per le spese sostenute nel 2026 (Legge di Bilancio 2026, L. 199/2025)."
+              : "Il 36% spetta sugli immobili diversi dall'abitazione principale per le spese sostenute nel 2026 (Legge di Bilancio 2026, L. 199/2025); sull'abitazione principale sale al 50%."}{" "}
+            Per il 2027 la legge di bilancio in discussione in Parlamento
+            prevede di confermare le aliquote attuali: senza proroga
+            scenderebbero al 36% e al 30%.
           </p>
           <p className="font-sans text-xs text-meridiana-text-tertiary mt-3 leading-relaxed italic">
             Se l&apos;installatore propone cessione del credito o sconto in

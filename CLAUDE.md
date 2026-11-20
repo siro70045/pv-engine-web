@@ -81,6 +81,8 @@ Definiti in `app/globals.css` via `@theme`:
   Da riconciliare quando si risolve la discrepanza tracciata 
   nel CLAUDE.md di pv_engine.
 
+- ⏰ **Testo normativo detrazione in `/casa/stima`** (card 03 + leva in `computeLeve`, `CasaResultView.tsx`): aggiornato il 20 nov 2026 a L. 199/2025 (50% abitazione principale / 36% altri immobili per il 2026), con nota che il DDL Bilancio 2027 propone di confermarle. **Da aggiornare a fine dicembre 2026** quando la legge di bilancio 2027 sarà approvata (citare la nuova legge e togliere "in discussione"). Il motore usa ancora 50/36 fissi: se la proroga salta, va adeguato anche lui.
+
 ## Convenzioni codice
 
 - TypeScript strict, no `any`
