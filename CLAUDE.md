@@ -68,7 +68,7 @@ Definiti in `app/globals.css` via `@theme`:
 - [ ] Segmento Aziende — pagina rimossa il 20 nov 2026; da reintrodurre (pagina + voce navbar/footer + blocco "Per chi è") quando sarà sviluppato
 - [x] ~~Pagina `/magazine`~~ — RIMOSSA dalla roadmap (20 nov 2026, decisione di Sirot): tolta da navbar e footer
 - [ ] Pagina `/metodologia` — versione minima live (dati PVGIS, calcolo orario, link al repo pv-engine con docs e audit); contenuto completo da sviluppare
-- [ ] Pagina `/storia` (fondatore)
+- [x] ~~Pagina `/storia` (fondatore)~~ — fatta come `/chi-sono` (20 nov 2026): layout stile iOS inset-grouped, sans-only, foto in `public/images/chi-sono/nicola.jpg`, testo scritto da Sirot. Voce "Chi sono" in navbar e footer; email contatto nicola.sirotti.07@gmail.com (anche nel footer, al posto di info@meridiana.it che non era sua)
 - [ ] Pagina `/manifesto` (decisioni etiche)
 - [ ] Pagina `/casi-reali` (Borzano + altri pilota)
 

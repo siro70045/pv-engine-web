@@ -35,17 +35,17 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2 text-sm text-meridiana-cream/60">
               <li><a href="/metodologia" className="hover:text-meridiana-cream">Metodologia</a></li>
-              <li><a href="/storia" className="hover:text-meridiana-cream">La storia</a></li>
+              <li><a href="/chi-sono" className="hover:text-meridiana-cream">Chi sono</a></li>
             </ul>
           </div>
 
-          {/* Contatti */}
-          <div>
+          {/* Contatti — full row on mobile so the email fits on one line */}
+          <div className="col-span-2 md:col-span-1">
             <h4 className="font-serif text-sm font-semibold mb-4 text-meridiana-cream">
               Contatti
             </h4>
             <ul className="space-y-2 text-sm text-meridiana-cream/60">
-              <li>info@meridiana.it</li>
+              <li><a href="mailto:nicola.sirotti.07@gmail.com" className="hover:text-meridiana-cream">nicola.sirotti.07@gmail.com</a></li>
               <li>
                 <span className="opacity-60">IT</span> ·
                 <span className="opacity-30 ml-1">EN</span>

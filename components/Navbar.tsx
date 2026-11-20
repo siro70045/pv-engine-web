@@ -6,7 +6,7 @@ import MeridianaLogo from "@/components/MeridianaLogo";
 import logoStyles from "@/components/MeridianaLogo.module.css";
 
 interface NavbarProps {
-  active?: "scuole" | "casa" | "metodologia";
+  active?: "scuole" | "casa" | "metodologia" | "chi-sono";
 }
 
 export default function Navbar({ active }: NavbarProps) {
@@ -16,6 +16,7 @@ export default function Navbar({ active }: NavbarProps) {
     { label: "Scuole", href: "/scuole", id: "scuole" },
     { label: "Casa", href: "/casa", id: "casa" },
     { label: "Metodologia", href: "/metodologia", id: "metodologia" },
+    { label: "Chi sono", href: "/chi-sono", id: "chi-sono" },
   ] as const;
 
   // Lock background scroll while the mobile menu is open. Cleanup always
