@@ -34,7 +34,6 @@ export default function Footer() {
               Risorse
             </h4>
             <ul className="space-y-2 text-sm text-meridiana-cream/60">
-              <li><a href="/magazine" className="hover:text-meridiana-cream">Magazine</a></li>
               <li><a href="/metodologia" className="hover:text-meridiana-cream">Metodologia</a></li>
               <li><a href="/storia" className="hover:text-meridiana-cream">La storia</a></li>
             </ul>

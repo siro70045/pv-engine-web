@@ -6,7 +6,7 @@ import MeridianaLogo from "@/components/MeridianaLogo";
 import logoStyles from "@/components/MeridianaLogo.module.css";
 
 interface NavbarProps {
-  active?: "scuole" | "casa" | "magazine" | "metodologia";
+  active?: "scuole" | "casa" | "metodologia";
 }
 
 export default function Navbar({ active }: NavbarProps) {
@@ -15,7 +15,6 @@ export default function Navbar({ active }: NavbarProps) {
   const navItems = [
     { label: "Scuole", href: "/scuole", id: "scuole" },
     { label: "Casa", href: "/casa", id: "casa" },
-    { label: "Magazine", href: "/magazine", id: "magazine" },
     { label: "Metodologia", href: "/metodologia", id: "metodologia" },
   ] as const;
 

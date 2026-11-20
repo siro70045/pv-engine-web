@@ -66,8 +66,8 @@ Definiti in `app/globals.css` via `@theme`:
 - [x] ~~Pagina `/casa/stima`~~ — COMPLETATA (Fase 2: form progressivo + risultato residenziale)
 - [ ] Pagina `/casa` — contenuto editoriale da sviluppare (oggi pagina minimale con bottone verso `/casa/stima`)
 - [ ] Segmento Aziende — pagina rimossa il 20 nov 2026; da reintrodurre (pagina + voce navbar/footer + blocco "Per chi è") quando sarà sviluppato
-- [ ] Pagina `/magazine` (lista articoli)
-- [ ] Pagina `/metodologia`
+- [x] ~~Pagina `/magazine`~~ — RIMOSSA dalla roadmap (20 nov 2026, decisione di Sirot): tolta da navbar e footer
+- [ ] Pagina `/metodologia` — versione minima live (dati PVGIS, calcolo orario, link al repo pv-engine con docs e audit); contenuto completo da sviluppare
 - [ ] Pagina `/storia` (fondatore)
 - [ ] Pagina `/manifesto` (decisioni etiche)
 - [ ] Pagina `/casi-reali` (Borzano + altri pilota)
