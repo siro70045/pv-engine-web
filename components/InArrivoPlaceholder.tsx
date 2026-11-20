@@ -4,7 +4,7 @@ interface InArrivoPlaceholderProps {
 }
 
 // Reusable "coming soon" placeholder for sections that aren't built yet
-// (/casa, /aziende, future ones). Renders a deliberately empty, centered
+// (future sections). Renders a deliberately empty, centered
 // block — reads as intentional, not unfinished. Navbar/Footer come from
 // app/layout.tsx, which already wraps page content in <main className="min-h-screen">,
 // so this is a <section> (no nested <main>). Navbar is h-16 (4rem); we

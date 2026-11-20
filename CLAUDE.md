@@ -51,8 +51,9 @@ Definiti in `app/globals.css` via `@theme`:
 - Sezione "Per chi è" (3 blocchi zig-zag Casa/Scuole/Aziende con illustrazioni isometriche, hover scale/saturate/shadow + scroll parallax) — COMPLETATA
 - Navbar: hover scale 1.12 sulle voci; logo+wordmark Meridiana con hover scale 1.10 + oscillazione dei 5 raggi (reduced-motion safe)
 - **Pagina `/scuole`** (segmento operativo primario) — 5 sezioni: Hero con foto scuola, Intro + 3 bottoni navigatori, "Come funziona" (4 passi), "Il programma educativo" (in arrivo autunno 2026), "Calibrato per le scuole" (calendario/occupazione/consumo). Fade-in di entrata one-shot per sezione (stagger eyebrow/titolo/corpo, reduced-motion safe) + smooth scroll tra bottoni e ancore. Componenti in `components/scuole/`. COMPLETATA
-- Pagina `/casa` — placeholder "IN ARRIVO", ma `/casa/stima` è COMPLETATA (vedi sotto)
-- Pagina `/aziende` — placeholder "IN ARRIVO" (componente `InArrivoPlaceholder`), in attesa di sviluppo
+- Pagina `/casa` — pagina d'ingresso minimale (titolo + testo + bottone giallo "Avvia una stima preliminare →" verso `/casa/stima`). Contenuto editoriale completo ancora da sviluppare (20 nov 2026)
+- Pagina `/aziende` — RIMOSSA (20 nov 2026, decisione di Sirot): tolta anche da navbar, footer e sezione "Per chi è" in homepage. `InArrivoPlaceholder` resta nel repo, oggi inutilizzato, per sezioni future
+- Sezione "Per chi è": ora 2 blocchi (Casa "GIÀ ATTIVO - Autunno 2026", Scuole); header "Per case e scuole."
 - **Pagina `/scuole/stima`** (Fase C) — stima preliminare Livello 1: form app-like (autocomplete comuni ISTAT, pillole), risultato con 3 metriche arrotondate + tease report + accordion assunzioni, form lead Livello 2 inline (Resend via `/api/lead`, honeypot + time-trap). CTA in fondo a `/scuole`. COMPLETATA
 - **Pagina `/casa/stima`** (Fase 2) — stima residenziale Livello 1: form a divulgazione progressiva (6 step, ogni campo appare come conseguenza del precedente con animazione + smooth scroll), due percorsi consumo (bolletta diretta / proxy), risultato con verdetto Meridiana + 3 metriche + "cosa cambierebbe le cose" + confronto scenari batteria + tabella taglie + assunzioni accordion. Backend: POST `/estimate/casa` stesso host scuole. NESSUN form lead Livello 2 (solo nota testuale). Componenti in `components/casa/stima/`. COMPLETATA (13 set 2026)
 - Pagina `/status` interna (diagnostica API)
@@ -63,8 +64,8 @@ Definiti in `app/globals.css` via `@theme`:
 - [x] ~~Pagina `/scuole`~~ — COMPLETATA (5 sezioni editoriali, fade-in entry, smooth scroll)
 - [x] ~~Pagina `/scuole/stima` + form lead~~ — COMPLETATA (Fase C: stima Livello 1 + richiesta report via Resend)
 - [x] ~~Pagina `/casa/stima`~~ — COMPLETATA (Fase 2: form progressivo + risultato residenziale)
-- [ ] Pagina `/casa` — contenuto editoriale da sviluppare (placeholder attivo; `/casa/stima` già live)
-- [ ] Pagina `/aziende` — placeholder "IN ARRIVO" attivo, contenuto da sviluppare
+- [ ] Pagina `/casa` — contenuto editoriale da sviluppare (oggi pagina minimale con bottone verso `/casa/stima`)
+- [ ] Segmento Aziende — pagina rimossa il 20 nov 2026; da reintrodurre (pagina + voce navbar/footer + blocco "Per chi è") quando sarà sviluppato
 - [ ] Pagina `/magazine` (lista articoli)
 - [ ] Pagina `/metodologia`
 - [ ] Pagina `/storia` (fondatore)
@@ -74,7 +75,7 @@ Definiti in `app/globals.css` via `@theme`:
 ## Problemi noti
 
 - Linee SVG connessione banner-edifici puntano correttamente agli edifici solo a risoluzione ~1400px. Su full-screen 2560+ i punti destinazione sono leggermente off (foto in `object-cover`, crop dinamico). Decisione 13 mag 2026: lasciare così, è dettaglio decorativo, non bloccante.
-- Voci navbar e card "Per chi è" puntano a `/scuole`, `/casa`, `/aziende`: ora tutte e tre esistono (più nessun 404). `/scuole` è completa; `/casa` e `/aziende` mostrano un placeholder "IN ARRIVO" finché non vengono sviluppate.
+- Voci navbar e card "Per chi è" puntano a `/scuole` e `/casa` (Aziende rimossa). Il testo dell'Hero cita ancora "la tua azienda": copy editoriale, lasciato di proposito.
 - ⚠ Numeri hero banner (120.000 kWh) allineati al valore 
   conservativo dichiarato, non al motore standalone (131.763). 
   Da riconciliare quando si risolve la discrepanza tracciata 

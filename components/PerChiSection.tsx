@@ -13,8 +13,8 @@ interface PerChiVoce {
 
 const voci: PerChiVoce[] = [
   {
-    stato: "IN ARRIVO – Inverno 2026",
-    statoTipo: "arrivo",
+    stato: "GIÀ ATTIVO - Autunno 2026",
+    statoTipo: "attivo",
     titolo: "Vale la pena installare i pannelli sulla tua casa?",
     corpo:
       "In 5 minuti scopri quanto produrresti, quanto risparmieresti, in quanti anni recuperi l'investimento, tutto grazie a numeri e grafici chiari. Teniamo conto delle tue abitudini, della tua bolletta, delle caratteristiche della tua casa, delle detrazioni IRPEF.",
@@ -34,18 +34,6 @@ const voci: PerChiVoce[] = [
     href: "/scuole",
     orientamento: "illo-right",
   },
-  {
-    stato: "IN ARRIVO – Primavera 2027",
-    statoTipo: "arrivo",
-    titolo: "Capannoni, uffici, attività commerciali.",
-    corpo:
-      "I numeri più alti del mercato sono qui: autoconsumo elevato, incentivi Transizione 5.0, ammortamento accelerato, possibilità di Comunità Energetica. Meridiana calcola con il rigore che il tuo CFO si aspetta, per dirti se il fotovoltaico può essere opportunità di risparmio.",
-    imageSrc: "/images/per-chi/azienda.png",
-    imageAlt:
-      "Illustrazione isometrica di un complesso industriale con impianto fotovoltaico",
-    href: "/aziende",
-    orientamento: "illo-left",
-  },
 ];
 
 export default function PerChiSection() {
@@ -55,14 +43,14 @@ export default function PerChiSection() {
         {/* Section header — deliberately tight pt above + small
             section padding-top so the eyebrow reads as a
             continuation of IntroSection, then a generous mb
-            below to detach the header from the Casa/Scuole/Aziende
+            below to detach the header from the Casa/Scuole
             blocks ("narration continues → pause → enumeration"). */}
         <div className="text-center mb-24 lg:mb-32">
           <p className="text-meridiana-yellow text-xs md:text-sm font-semibold tracking-[0.2em] uppercase mb-2">
             Magari fa al caso tuo
           </p>
           <p className="text-meridiana-text-secondary text-lg">
-            Per case, scuole, aziende.
+            Per case e scuole.
           </p>
         </div>
 
