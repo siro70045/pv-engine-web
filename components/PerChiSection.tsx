@@ -17,7 +17,7 @@ const voci: PerChiVoce[] = [
     statoTipo: "attivo",
     titolo: "Vale la pena installare i pannelli sulla tua casa?",
     corpo:
-      "In 5 minuti scopri quanto produrresti, quanto risparmieresti, in quanti anni recuperi l'investimento, tutto grazie a numeri e grafici chiari. Teniamo conto delle tue abitudini, della tua bolletta, delle caratteristiche della tua casa, delle detrazioni IRPEF.",
+      "In 5 minuti scopri quanta parte della bolletta copriresti, quanto costerebbe l'impianto e in quanti anni recuperi l'investimento, con o senza batteria. Teniamo conto delle tue abitudini, della tua bolletta, delle caratteristiche della tua casa e della detrazione IRPEF.",
     imageSrc: "/images/per-chi/casa.png",
     imageAlt: "Illustrazione isometrica di una casa con impianto fotovoltaico",
     href: "/casa",

@@ -17,9 +17,10 @@ export default function CasaPage() {
           Vale la pena installare i pannelli sulla tua casa?
         </h1>
         <p className="text-meridiana-text-secondary text-lg leading-relaxed mb-10">
-          In pochi minuti scopri quanto produrresti, quanto investiresti e in
-          quanti anni recuperi la spesa. Teniamo conto della tua bolletta,
-          delle tue abitudini e delle caratteristiche della tua casa.
+          In pochi minuti scopri quanta parte della bolletta copriresti, quanto
+          costerebbe l&apos;impianto e in quanti anni recuperi la spesa.
+          Teniamo conto della tua bolletta, delle tue abitudini, delle
+          caratteristiche della tua casa e della detrazione IRPEF.
         </p>
         <a
           href="/casa/stima"
