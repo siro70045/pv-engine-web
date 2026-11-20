@@ -106,7 +106,9 @@ export interface LeadResponse {
 export type CasaOrientamento =
   | "sud"
   | "sud_est_sud_ovest"
-  | "est_o_ovest"
+  | "est"
+  | "ovest"
+  | "est_o_ovest" // legacy value, still accepted by the API (modelled as east)
   | "nord"
   | "non_so";
 
@@ -205,6 +207,8 @@ export interface CasaEstimateResponse {
   co2_evitata_kg_anno?: number;
   payback_anni: RangeLowHigh;
   capex_indicativo_eur: number;
+  // Market cost band for this size (calibrated curve, backend ≥ 20 nov 2026).
+  capex_banda_eur?: RangeLowHigh;
   senza_batteria: CasaScenario;
   con_batteria: CasaScenario;
   verdetto_pv: CasaVerdettoPV;

@@ -65,7 +65,8 @@ const PRESENZA: { value: CasaPresenzaDiurna; label: string }[] = [
 const ORIENTAMENTO: { value: CasaOrientamento; label: string }[] = [
   { value: "sud", label: "Sud" },
   { value: "sud_est_sud_ovest", label: "Sud-est o sud-ovest" },
-  { value: "est_o_ovest", label: "Est o ovest" },
+  { value: "est", label: "Est" },
+  { value: "ovest", label: "Ovest" },
   { value: "nord", label: "Nord" },
   { value: "non_so", label: "Non lo so" },
 ];

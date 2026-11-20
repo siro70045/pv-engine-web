@@ -306,8 +306,10 @@ function DifesaSection({
       ? Math.abs(totLordo - totEffettivo) < 1
       : true;
 
-  const lo = Math.round(capex * 0.83);
-  const hi = Math.round(capex * 1.2);
+  // Market band from the backend's calibrated cost curve; old ±15-20 % fallback
+  // only for responses from a backend that doesn't send it yet.
+  const lo = result.capex_banda_eur?.low ?? Math.round(capex * 0.83);
+  const hi = result.capex_banda_eur?.high ?? Math.round(capex * 1.2);
 
   function Card({
     num,
@@ -355,7 +357,8 @@ function DifesaSection({
             <strong>
               {eur(lo)} – {eur(hi)}
             </strong>{" "}
-            (±15–20%, chiavi in mano IVA inclusa).
+            (prezzi di mercato 2025-2026 per questa taglia, chiavi in mano,
+            IVA inclusa, senza batteria).
           </p>
           <p className="font-sans text-xs text-meridiana-text-tertiary mt-3 leading-relaxed italic">
             Se un preventivo si discosta molto, chiedi cosa include. Molto
