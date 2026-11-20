@@ -511,7 +511,17 @@ export default function CasaResultView({
           value={investimentoValue}
           detail="Costo chiavi in mano IVA inclusa; incentivo non ancora dedotto."
         />
-        <StatCard label="Tempo di rientro" value={paybackValue} />
+        <StatCard
+          label="Tempo di rientro"
+          value={paybackValue}
+          detail={
+            // Payback counts plain euros; NPV discounts them at 5 %. A finite
+            // payback next to a negative NPV reads like a contradiction, so say why.
+            r.senza_batteria.npv_eur <= 0 && r.senza_batteria.payback_anni < 25
+              ? "Recuperi la spesa, ma il guadagno complessivo resta sotto quello di un investimento prudente al 5% annuo, il riferimento che usiamo."
+              : undefined
+          }
+        />
       </div>
 
       {/* C: Cosa cambierebbe le cose */}
