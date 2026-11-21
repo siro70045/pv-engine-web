@@ -3,13 +3,12 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Meridiana — Informativa sulla privacy",
   description: "Come Meridiana tratta i dati inviati con la richiesta di analisi per la casa.",
-  robots: { index: false }, // draft: index once Sirot has approved the text
 };
 
 const CONTACT_EMAIL = "nicola.sirotti.07@gmail.com";
 
-// DRAFT (22 nov 2026) written by Claude for Sirot's review — not legal advice.
-// Points to confirm are listed in the yellow box and in CLAUDE.md.
+// Written by Claude, approved by Sirot (22 nov 2026). Not reviewed by a lawyer:
+// full regulatory check (data, site) planned after the Livello 2 work.
 
 interface Sezione {
   titolo: string;
@@ -97,15 +96,6 @@ export default function PrivacyPage() {
   return (
     <div className="px-6 py-12 md:py-16">
       <article className="max-w-2xl mx-auto">
-        <div
-          role="note"
-          className="mb-8 rounded-xl border border-meridiana-yellow bg-meridiana-yellow/15 px-4 py-3 font-sans text-sm text-meridiana-black leading-relaxed"
-        >
-          <strong>Bozza da rivedere, non ancora in vigore.</strong> Da
-          confermare: nome del titolare, durata di conservazione (12 mesi),
-          elenco dei fornitori e garanzie per gli Stati Uniti.
-        </div>
-
         <h1 className="font-serif text-3xl md:text-5xl text-meridiana-black font-semibold leading-[1.15]">
           Informativa sulla privacy
         </h1>
