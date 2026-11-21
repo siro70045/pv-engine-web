@@ -55,3 +55,16 @@ export async function postLead(
   if (!res.ok) throw new ApiError(res.status, await res.text());
   return res.json() as Promise<import("./types").LeadResponse>;
 }
+
+// Internal route: personal data never reaches the Railway backend directly.
+export async function postAnalisiCasa(
+  req: import("./types").AnalisiCasaRequest,
+): Promise<import("./types").AnalisiCasaResponse> {
+  const res = await fetch("/api/analisi-casa", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(req),
+  });
+  if (!res.ok) throw new ApiError(res.status, await res.text());
+  return res.json() as Promise<import("./types").AnalisiCasaResponse>;
+}

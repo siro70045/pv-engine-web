@@ -36,6 +36,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-meridiana-cream/60">
               <li><a href="/metodologia" className="hover:text-meridiana-cream">Metodologia</a></li>
               <li><a href="/chi-sono" className="hover:text-meridiana-cream">Chi sono</a></li>
+              <li><a href="/privacy" className="hover:text-meridiana-cream">Privacy</a></li>
             </ul>
           </div>
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ApiError, postCasaEstimate } from "@/lib/api";
+import { savePrefill } from "@/lib/casaPrefill";
 import type {
   CasaEstimateRequest,
   CasaEstimateResponse,
@@ -295,8 +296,11 @@ export default function CasaStimaFlow() {
     if (!canSubmit) return;
     setPhase({ kind: "loading" });
     topRef.current?.scrollIntoView({ block: "start", behavior: "auto" });
+    const request = buildRequest();
+    // Hand the answers over to /casa/analisi (Livello 2), same tab only
+    savePrefill({ request, superficieDaFascia: true });
     try {
-      const data = await postCasaEstimate(buildRequest());
+      const data = await postCasaEstimate(request);
       setPhase({ kind: "result", data });
     } catch (e) {
       setPhase({ kind: "error", message: errorMessage(e) });

@@ -64,6 +64,12 @@ Definiti in `app/globals.css` via `@theme`:
 - [x] ~~Pagina `/scuole`~~ — COMPLETATA (5 sezioni editoriali, fade-in entry, smooth scroll)
 - [x] ~~Pagina `/scuole/stima` + form lead~~ — COMPLETATA (Fase C: stima Livello 1 + richiesta report via Resend)
 - [x] ~~Pagina `/casa/stima`~~ — COMPLETATA (Fase 2: form progressivo + risultato residenziale)
+- [~] Pagina `/casa/analisi` (Livello 2) — SCHELETRO (22 nov 2026), non ancora pubblico (`noindex`; il link è nel risultato di `/casa/stima`):
+  - Form in `components/casa/analisi/AnalisiCasaForm.tsx`: casa (comune, indirizzo, tipo, abitazione principale), riquadro tratteggiato per la mappa (in arrivo: MapLibre + ortofoto AGEA), consumi con bolletta OBBLIGATORIA (decisione di Sirot) e superficie precisa, riscaldamento/acqua calda (+ gas e terminali se il riscaldamento è a gas), orientamento e ombre vicine, IRPEF facoltativa, fino a 3 preventivi (solo numeri), contatti, casella privacy obbligatoria.
+  - Precompilato dalla stima via `sessionStorage` (`lib/casaPrefill.ts`, mai nell'URL); la superficie NON si riprende (nella stima è il centro di una fascia). Campi numerici `type="text" inputMode="decimal"`: accettano "4,5" e "8.900".
+  - `app/api/analisi-casa/route.ts`: honeypot + time-trap come `/api/lead`; 1ª mail a Sirot con la richiesta (subito, replyTo = utente); poi con `after()` chiama il motore con `report: true` e manda una 2ª mail con sintesi (esito, ombre, sensibilità, preventivi) e i JSON allegati. Se il motore fallisce la 2ª mail lo dice. Al motore va solo la parte tecnica, ricostruita campo per campo: mai nome, email, telefono, indirizzo (minimizzazione GDPR). `maxDuration = 60`.
+  - Testato in locale con motore e Resend finti (prefill → invio → due mail con allegati). Da provare su Vercel dopo il push del motore.
+- [ ] Pagina `/privacy` — BOZZA scritta da Claude il 22 nov 2026, da rivedere: titolare, conservazione 12 mesi, fornitori (Vercel, Resend, Google, Railway, PVGIS), trasferimenti USA. Banner giallo "bozza" in cima e `noindex` finché Sirot non la approva. Link nel footer.
 - [ ] Pagina `/casa` — contenuto editoriale da sviluppare (oggi pagina minimale con bottone verso `/casa/stima`)
 - [ ] Segmento Aziende — pagina rimossa il 20 nov 2026; da reintrodurre (pagina + voce navbar/footer + blocco "Per chi è") quando sarà sviluppato
 - [x] ~~Pagina `/magazine`~~ — RIMOSSA dalla roadmap (20 nov 2026, decisione di Sirot): tolta da navbar e footer

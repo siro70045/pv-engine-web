@@ -144,6 +144,50 @@ export interface CasaEstimateRequest {
   terminali?: string; // termosifoni | pavimento_radiante | ventilconvettori | non_so
   gas_smc_annui?: number;
   gas_smc_estivi_mese?: number;
+  // ── Livello 2 (backend ≥ 22 nov 2026) ──
+  tipo_abitazione?: CasaTipoAbitazione;
+  ombra_ostacoli?: CasaOmbraOstacoli;
+  ombra_lati?: CasaOmbraLato[];
+  ombra_durata?: CasaOmbraDurata;
+  report?: boolean;
+  preventivi?: PreventivoInput[]; // requires report: true
+}
+
+export type CasaTipoAbitazione = "casa" | "appartamento";
+export type CasaOmbraOstacoli = "no" | "si" | "non_so";
+export type CasaOmbraLato = "sud" | "est" | "ovest";
+export type CasaOmbraDurata = "qualche_ora" | "buona_parte";
+
+// Same shape as the engine's PreventivoIn (POST /verifica/preventivo).
+export interface PreventivoInput {
+  etichetta?: string;
+  kwp: number;
+  prezzo_totale_eur: number;
+  prezzo_iva_inclusa: boolean;
+  batteria_kwh: number;
+  produzione_promessa_kwh?: number;
+}
+
+// ── POST /api/analisi-casa (richiesta di analisi Livello 2, casa) ─────────────
+
+// Personal data (nome, email, indirizzo…) stays in the Next.js route and the
+// notification email; only `stima` (technical data, no identity) is sent to
+// the engine.
+export interface AnalisiCasaRequest {
+  nome: string;
+  email: string;
+  telefono?: string;
+  indirizzo: string;
+  note?: string;
+  consenso_privacy: true;
+  stima: CasaEstimateRequest & { bolletta_kwh: number };
+  // anti-spam
+  website: string;
+  opened_at: number;
+}
+
+export interface AnalisiCasaResponse {
+  ok: boolean;
 }
 
 export interface CasaScenario {

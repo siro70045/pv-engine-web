@@ -724,12 +724,25 @@ export default function CasaResultView({
         </ul>
       </details>
 
-      {/* I: Nota Livello 2 */}
-      <p className="font-sans text-sm text-meridiana-text-tertiary leading-relaxed px-1">
-        Per un&apos;analisi completa con i dati reali della tua abitazione —
-        consumi orari, dimensionamento preciso, confronto tariffario e
-        simulazione finanziaria — è disponibile la stima di Livello 2.
-      </p>
+      {/* I: Livello 2 — analysis request (answers carried over via sessionStorage) */}
+      <div className="bg-meridiana-cream-light rounded-2xl p-6 md:p-8 shadow-[0_8px_30px_rgba(26,22,18,0.06)] text-center">
+        <p className="font-sans text-sm md:text-base text-meridiana-text-secondary leading-relaxed max-w-lg mx-auto">
+          Vuoi numeri più precisi? Con l&apos;analisi completa usiamo il tuo
+          tetto vero, le ombre intorno alla casa e i tuoi consumi reali; ti
+          mostriamo il beneficio anno per anno e, se li hai, verifichiamo i
+          preventivi che hai ricevuto.
+        </p>
+        <a
+          href="/casa/analisi"
+          className="inline-block mt-6 w-full sm:w-auto sm:px-10 bg-meridiana-yellow hover:bg-meridiana-yellow-hover text-meridiana-black font-sans font-semibold text-base px-6 py-4 rounded-xl shadow-sm transition-all duration-200 ease-out active:scale-[0.98] hover:shadow-md motion-reduce:transition-none motion-reduce:active:scale-100"
+        >
+          Richiedi l&apos;analisi completa →
+        </a>
+        <p className="font-sans text-xs text-meridiana-text-tertiary mt-3">
+          Gratuita in questa prima fase. Le risposte che hai già dato restano
+          compilate.
+        </p>
+      </div>
     </div>
   );
 }
